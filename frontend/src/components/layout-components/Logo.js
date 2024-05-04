@@ -56,7 +56,15 @@ export const Logo = ({ mobileLogo, logoType }) => {
 
 	return (
 		<LogoWrapper className={isMobile && !mobileLogo ? 'd-none' : 'logo'} style={{width: `${getLogoWidthGutter()}`}}>
-			<img src={getLogo()} alt={`${APP_NAME} logo`} />
+			<img 
+				src={getLogo()} 
+				alt={`${APP_NAME} logo`} 
+				style={{
+					// padding : navCollapsed === true && "0px",
+					marginLeft: navCollapsed === true ? "-30px" : "-15px",
+					marginTop: navCollapsed === true ? "0px" : "15px"
+
+				}}/>
 		</LogoWrapper>
 	)
 }

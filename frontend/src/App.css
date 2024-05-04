@@ -1,5 +1,19 @@
+/* .logo{
+    padding: 0px !important;
+    margin-left: -10px !important;
+} */
+
 .ant-card-custom{
     box-shadow: 1px 1px 10px 1px #d9d9d9;
+}
+
+.login-page-wrapper-overlay{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
 .login-form-banner{
@@ -12,15 +26,14 @@
     font-weight: 900;
     margin: 0px;
     padding: 0px;
-    line-height: 32px;
+    line-height: 42px;
     margin-bottom: 10px;
 }
 
 .typewriter p {
-    overflow: hidden; /* Ensures the content is not revealed until the animation */
-    white-space: nowrap; /* Keeps the content on a single line */
-    margin: 0 auto; /* Gives that scrolling effect as the typing happens */
-    /* letter-spacing: .15em; Adjust as needed */
+    overflow: hidden;
+    white-space: nowrap;
+    margin: 0 auto; 
     animation: 
         typing 3.5s steps(40, end),
         blink-caret .75s step-end infinite;
@@ -45,31 +58,6 @@
 @keyframes shuttleMove2{
     from {margin-left: -200px;}
     to {margin-left: 200px;}
-}
-
-
-.home-planet-img{
-    width: 300px;
-    height: 300px;
-    margin-top: 10%;
-    object-fit: cover;
-    animation: example 15s infinite;
-    
-}
-
-.home-shuttle-img{
-    width: 70px;
-    height: 70px;
-    rotate: 50deg;
-    animation: shuttleMove1, shuttleMove2;
-    animation-duration: 20s;
-    animation-iteration-count: infinite;
-}
-
-.mars-rover-explanation{
-    position: absolute;
-    top: 0;
-    margin-top: 3%;
 }
 
 .loading-spinner-wrapper{
@@ -186,10 +174,6 @@ p{
 .apod-text{
     margin-left: 25%;
 }
-
-/* .ant-picker-dropdown{
-    left: 75% !important;
-} */
 
 @media only screen and (min-width: 220px) and (max-width: 576px){
     .login-form-banner{

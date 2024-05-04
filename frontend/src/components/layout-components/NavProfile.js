@@ -28,6 +28,7 @@ import { useCookies } from "react-cookie"
 import { GOOGLE_BUCKET_URL } from "configs/AppConfig";
 import { API_BASE_URL } from "configs/AppConfig";
 import { useNavigate } from "react-router-dom";
+import AvatarStatus from "components/shared-components/AvatarStatus";
 
 const Icon = styled.div(() => ({
     fontSize: FONT_SIZES.LG,
@@ -180,11 +181,16 @@ export const NavProfile = ({ mode }) => {
         <Dropdown placement="bottomRight" menu={{items}} trigger={["click"]}>
         	<NavItem mode={mode}>
         		<Profile>
-                    {
+                    {/* {
                         userImage === "" || userImage === null || userImage === undefined ?
                         <Avatar>{`${userFirstName[0]?.toUpperCase()}${userLastName[0]?.toUpperCase()}`}</Avatar> : 
                         <Avatar src={userImage} /> 
-                    }
+                    } */}
+                    <AvatarStatus
+                        src={`${GOOGLE_BUCKET_URL}/${userImage}`}
+                        name={`${userFirstName} ${userLastName}`}
+                        dontShowNameAndSubtitle={true}
+                    />
         			<UserInfo className="profile-text">
         				<Name>{userFirstName} {userLastName}</Name>
         				{/* <Title>{userRole}</Title> */}

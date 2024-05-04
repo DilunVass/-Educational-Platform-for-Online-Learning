@@ -30,6 +30,7 @@ const Login = (props) => {
 
     return (
         <div style={backgroundStyle}>
+            <div className="login-page-wrapper-overlay"></div>
             <div style={{ width: "100%", maxWidth: "1200px" }}>
                 <Row style={{ width: "100%" }}>
                     <Col xs={24}>
@@ -50,14 +51,14 @@ const Login = (props) => {
 										<div className="login-form-banner">
 											<Row>
 												<Col xs={24}>
-													<p className="login-form-banner-p-1">Hello</p>
+													<p className="login-form-banner-p-1">The future of</p>
 												</Col>
 												<Col xs={24}>
-													<p className="login-form-banner-p-1">Ready to</p>
+													<p className="login-form-banner-p-1">E-Learning</p>
 												</Col>
 												<Col xs={24}>
 													<div class="typewriter">
-														<p className="login-form-banner-p-1">Explore Mars?</p>
+														<p className="login-form-banner-p-1">Is wide open!</p>
 													</div>
 												</Col>
 											</Row>

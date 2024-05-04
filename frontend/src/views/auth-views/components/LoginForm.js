@@ -58,89 +58,141 @@ export const LoginForm = (props) => {
 
     const signIn = async (data) => {
         try {
-            const response = await axios.post(
-                `${API_AUTH_URL}/api/auth/signin`,
-                {
-                    "userCredentials" : {
-                        user_name: `${data.user_name}`,
-                        password: `${data.password}`,
-                    }
-                },
-                {
-                    headers: {
-                        "Content-Type": "application/json",
-                        Accept: "text/plain",
-                        "Access-Control-Allow-Origin": "*",
-                    },
-                }
-            );
-            console.log(response.data);
+            // const response = await axios.post(
+            //     `${API_AUTH_URL}/api/auth/signin`,
+            //     {
+            //         "userCredentials" : {
+            //             user_name: `${data.user_name}`,
+            //             password: `${data.password}`,
+            //         }
+            //     },
+            //     {
+            //         headers: {
+            //             "Content-Type": "application/json",
+            //             Accept: "text/plain",
+            //             "Access-Control-Allow-Origin": "*",
+            //         },
+            //     }
+            // );
+            // console.log(response.data);
 
-            if (response.data.status === "Fail") {
-                setShowMessage("Invalid User name or Password !");
-                setTimeout(() => {
-                    setShowMessage("");
-                    dispatch(stopLoading());
-                }, 1500);
-            } else if (response.data.status === "Success") {
+            // if (response.data.status === "Fail") {
+            //     setShowMessage("Invalid User name or Password !");
+            //     setTimeout(() => {
+            //         setShowMessage("");
+            //         dispatch(stopLoading());
+            //     }, 1500);
+            // } else if (response.data.status === "Success") {
 
-                setCookie(
-                    "isDefaultPassword",
-                    response.data.isDefaultPassword === true? 'true' : 'false',
-                    { path: "/", expires: new Date(Date.now() + 3600e3) }
-                );
-                setCookie("token", response.data.token, {
-                    path: "/",
-                    expires: new Date(Date.now() + 3600e3),
-                });
-                setCookie("userId", response.data.id, {
-                    path: "/",
-                    expires: new Date(Date.now() + 3600e3),
-                });
-                setCookie("userRole", response.data.role, {
-                    path: "/",
-                    expires: new Date(Date.now() + 3600e3),
-                });
-                setCookie("userFirstName", response.data.first_name, {
-                    path: "/",
-                    expires: new Date(Date.now() + 3600e3),
-                });
-                setCookie("userLastName", response.data.last_name, {
-                    path: "/",
-                    expires: new Date(Date.now() + 3600e3),
-                });
-				setCookie("userImage", response.data.profilePicture, {
-                    path: "/",
-                    expires: new Date(Date.now() + 3600e3),
-                });
-                setCookie("isDarkMode", response.data.isDarkMode === true? 'dark' : 'light'
-				, {
-                    path: "/",
-                    expires: new Date(Date.now() + 3600e3),
-                });
+            //     setCookie(
+            //         "isDefaultPassword",
+            //         response.data.isDefaultPassword === true? 'true' : 'false',
+            //         { path: "/", expires: new Date(Date.now() + 3600e3) }
+            //     );
+            //     setCookie("token", response.data.token, {
+            //         path: "/",
+            //         expires: new Date(Date.now() + 3600e3),
+            //     });
+            //     setCookie("userId", response.data.id, {
+            //         path: "/",
+            //         expires: new Date(Date.now() + 3600e3),
+            //     });
+            //     setCookie("userRole", response.data.role, {
+            //         path: "/",
+            //         expires: new Date(Date.now() + 3600e3),
+            //     });
+            //     setCookie("userFirstName", response.data.first_name, {
+            //         path: "/",
+            //         expires: new Date(Date.now() + 3600e3),
+            //     });
+            //     setCookie("userLastName", response.data.last_name, {
+            //         path: "/",
+            //         expires: new Date(Date.now() + 3600e3),
+            //     });
+			// 	setCookie("userImage", response.data.profilePicture, {
+            //         path: "/",
+            //         expires: new Date(Date.now() + 3600e3),
+            //     });
+            //     setCookie("isDarkMode", response.data.isDarkMode === true? 'dark' : 'light'
+			// 	, {
+            //         path: "/",
+            //         expires: new Date(Date.now() + 3600e3),
+            //     });
 
-                dispatch(signInSuccess(response.data.token));
-                dispatch(
-                    setIsDefaultPassword(
-                        response.data.isDefaultPassword === true? 'true' : 'false'
-                    )
-                );
+            //     dispatch(signInSuccess(response.data.token));
+            //     dispatch(
+            //         setIsDefaultPassword(
+            //             response.data.isDefaultPassword === true? 'true' : 'false'
+            //         )
+            //     );
                 
-				dispatch(setUserImage(response.data.profilePicture));
-				dispatch(onSwitchTheme(response.data.isDarkMode === true? 'dark' : 'light'));
-                dispatch(setUserId(response.data.id));
-                dispatch(setUserFirstName(response.data.first_name));
-                dispatch(setUserLastName(response.data.last_name));
-                dispatch(setUserRole(response.data.role));
+			// 	dispatch(setUserImage(response.data.profilePicture));
+			// 	dispatch(onSwitchTheme(response.data.isDarkMode === true? 'dark' : 'light'));
+            //     dispatch(setUserId(response.data.id));
+            //     dispatch(setUserFirstName(response.data.first_name));
+            //     dispatch(setUserLastName(response.data.last_name));
+            //     dispatch(setUserRole(response.data.role));
 
-                navigate("/");
-            } else {
-                setShowMessage("Error Occured !");
-                setTimeout(() => {
-                    setShowMessage("");
-                    dispatch(stopLoading());
-                }, 1500);
-            }
+            //     navigate("/");
+            // } else {
+            //     setShowMessage("Error Occured !");
+            //     setTimeout(() => {
+            //         setShowMessage("");
+            //         dispatch(stopLoading());
+            //     }, 1500);
+            // }
+
+
+            setCookie(
+                "isDefaultPassword",
+                'false',
+                { path: "/", expires: new Date(Date.now() + 3600e3) }
+            );
+            setCookie("token", "43thbftu5iu4t5", {
+                path: "/",
+                expires: new Date(Date.now() + 3600e3),
+            });
+            setCookie("userId", 12, {
+                path: "/",
+                expires: new Date(Date.now() + 3600e3),
+            });
+            setCookie("userRole", "Admin", {
+                path: "/",
+                expires: new Date(Date.now() + 3600e3),
+            });
+            setCookie("userFirstName", "Chamalka", {
+                path: "/",
+                expires: new Date(Date.now() + 3600e3),
+            });
+            setCookie("userLastName", "Marasinghe", {
+                path: "/",
+                expires: new Date(Date.now() + 3600e3),
+            });
+            setCookie("userImage", "ererer", {
+                path: "/",
+                expires: new Date(Date.now() + 3600e3),
+            });
+            setCookie("isDarkMode", 'dark'
+            , {
+                path: "/",
+                expires: new Date(Date.now() + 3600e3),
+            });
+
+            dispatch(signInSuccess("45454545"));
+            dispatch(
+                setIsDefaultPassword(
+                    'false'
+                )
+            );
+            
+            dispatch(setUserImage("34343"));
+            dispatch(onSwitchTheme('dark'));
+            dispatch(setUserId(12));
+            dispatch(setUserFirstName("Chamalka"));
+            dispatch(setUserLastName("Marasinghe"));
+            dispatch(setUserRole("Admin"));
+            navigate("/");
+
         } catch (error) {
             if (error.response.status === 401){
 
@@ -252,11 +304,6 @@ LoginForm.propTypes = {
     showForgetPassword: PropTypes.bool,
     extra: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
 };
-
-// LoginForm.defaultProps = {
-//     otherSignIn: true,
-//     showForgetPassword: false,
-// };
 
 const mapStateToProps = ({ auth }) => {
     const { loading, message, showMessage, token, redirect } = auth;

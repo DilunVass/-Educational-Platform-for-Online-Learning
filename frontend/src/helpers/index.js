@@ -39,3 +39,7 @@ export const openNotificationWithIcon = (type, title, desc) => {
         description: desc,
     });
 };
+
+export const isContainsOnlyWhiteSpace = (str) => {
+    return /^\s*$/.test(str);
+};

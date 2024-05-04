@@ -18,8 +18,8 @@ export const LAYOUT_CONTENT_GUTTER = 25;
 export const LAYOUT_CONTENT_GUTTER_SM = 15;
 export const SIDE_NAV_DARK_BG_COLOR = '#001529'
 
-export const GOLD_BASE_OUR_GYM = '#ffd700';
-export const GRAY_TEXT_COLOR_OF_BUTTONS_OUR_GYM = "#292928";
+export const GOLD_BASE_OUR_GYM = '#9311d4';
+export const GRAY_TEXT_COLOR_OF_BUTTONS_OUR_GYM = "#fcfcfc";
 export const BLUE_BASE= '#3e79f7';
 export const PURPLE_BASE= '#a461d8';
 export const CYAN_BASE= '#04d182';

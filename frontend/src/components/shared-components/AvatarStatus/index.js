@@ -4,6 +4,7 @@ import { useSelector } from "react-redux"
 import PropTypes from 'prop-types'
 import { Avatar } from 'antd';
 import { BLUE_BASE, GOLD_BASE_OUR_GYM } from 'constants/ThemeConstant';
+import { isContainsOnlyWhiteSpace } from 'helpers';
 import { GOOGLE_BUCKET_URL } from 'configs/AppConfig';
 
 // const renderAvatar = (props) => {
@@ -73,19 +74,19 @@ export const AvatarStatus = props => {
 		<div className="avatar-status d-flex align-items-center">
 			{/* {renderAvatar({icon, src, type, size, shape, gap, text, name })} */}
 			{
-				isImageAvailable &&
-				<Avatar {...props} className={`ant-avatar-${props.type}`}>{props.text}</Avatar>
+				!isImageAvailable && props.name?.trim().split(" ").length > 1 && !isContainsOnlyWhiteSpace(props.name) &&
+				<Avatar {...props}>{`${props.name?.trim().split(" ")[0]?.trim()[0]?.toUpperCase() !== undefined ? props.name?.trim().split(" ")[0]?.trim()[0]?.toUpperCase() : ""}${props.name?.trim().split(" ")[props.name?.trim().split(" ").length-1]?.trim()[0]?.toUpperCase() !== undefined ? props.name?.trim().split(" ")[props.name?.trim().split(" ").length-1]?.trim()[0]?.toUpperCase() : ""}`}</Avatar> 
 			}
 			{
-				!isImageAvailable && props.name?.split(" ").length > 1 &&
-				<Avatar {...props}>{`${props.name?.split(" ")[0]?.trim()[0]?.toUpperCase()}${props.name?.split(" ")[props.name?.split(" ").length-1]?.trim()[0]?.toUpperCase()}`}</Avatar> 
+				!isImageAvailable && props.name?.trim().split(" ").length == 1 && !isContainsOnlyWhiteSpace(props.name) &&
+				<Avatar {...props}>{`${props.name?.trim().split(" ")[0]?.trim()[0]?.toUpperCase()}`}</Avatar> 
 			}
 			{
-				!isImageAvailable && props.name?.split(" ").length == 1 &&
-				<Avatar {...props}>{`${props.name?.split(" ")[0]?.trim()[0]?.toUpperCase()}`}</Avatar> 
+				!isImageAvailable && (props.name?.trim() === undefined || props.name?.trim() === null) && !isContainsOnlyWhiteSpace(props.name?.trim()) &&
+				<Avatar {...props}>No Name</Avatar> 
 			}
 			{
-				!isImageAvailable && (props.name === undefined || props.name === null) &&
+				!isImageAvailable && isContainsOnlyWhiteSpace(props.name) &&
 				<Avatar {...props}>No Name</Avatar> 
 			}
 			{

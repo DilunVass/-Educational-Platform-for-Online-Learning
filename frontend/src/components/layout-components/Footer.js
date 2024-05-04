@@ -23,11 +23,11 @@ export default function Footer() {
        			flex-direction: column;
 			}
 		`}>
-			<span>Powered By Nasa-Rovers - Copyright  &copy;  {`${new Date().getFullYear()}`} <span className="font-weight-semibold"></span></span>
+			<span>Powered By NexTutor - Copyright  &copy;  {`${new Date().getFullYear()}`} <span className="font-weight-semibold"></span></span>
 			<div>
 				{/* <a className="text-gray" href="/#" onClick={e => e.preventDefault()}>Term & Conditions</a> */}
 				<span className="mx-2 text-muted"> | </span>
-				<a className="text-gray">Nasa Rovers</a>
+				<a className="text-gray">NexTutor</a>
 			</div>
 		</footer>
 	)

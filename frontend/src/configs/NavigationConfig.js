@@ -26,17 +26,17 @@ const sectionNav = [{
   isGroupTitle: true,
   submenu: [
     {
-      key: 'dashboards/marsRoverPhotos',
-      path: `${APP_PREFIX_PATH}/dashboards/marsRoversPhotos`,
-      title: 'Mars',
+      key: 'dashboards/',
+      path: `${APP_PREFIX_PATH}/`,
+      title: 'A',
       icon: UsergroupDeleteOutlined,
       breadcrumb: false,
       isGroupTitle: false,
       submenu: [
         {
-          key: 'marsRoverPhotos-view',
-          path: `${APP_PREFIX_PATH}/dashboards/marsRoversPhotos/view`,
-          title: 'Mars Rovers',
+          key: 'view',
+          path: `${APP_PREFIX_PATH}/view`,
+          title: 'B',
           icon: UsergroupAddOutlined,
           breadcrumb: false,
           submenu: []
@@ -44,17 +44,17 @@ const sectionNav = [{
       ]
     },
     {
-      key: 'dashboards/astronomyPhotoOfDay',
-      path: `${APP_PREFIX_PATH}/dashboards/astronomyPhotoOfDay`,
-      title: 'Astronomy Pictures',
+      key: 'dashboards/',
+      path: `${APP_PREFIX_PATH}`,
+      title: 'C',
       icon: UsergroupDeleteOutlined,
       breadcrumb: false,
       isGroupTitle: false,
       submenu: [
         {
-          key: 'astronomyPhotoOfDay-view',
-          path: `${APP_PREFIX_PATH}/dashboards/astronomyPhotoOfDay/view`,
-          title: 'Imagery',
+          key: 'vieww',
+          path: `${APP_PREFIX_PATH}`,
+          title: 'D',
           icon: UsergroupAddOutlined,
           breadcrumb: false,
           submenu: []
