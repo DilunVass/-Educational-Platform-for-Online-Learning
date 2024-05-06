@@ -1,5 +1,6 @@
 package com.example.course_service.Services;
 
+import com.example.course_service.Category;
 import com.example.course_service.Dtos.CourseDto;
 import com.example.course_service.Dtos.EnrollmentRequest;
 import com.example.course_service.Models.Course;
@@ -10,8 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.time.LocalDate;
 
 @Service
 public class CourseService {
@@ -57,7 +60,7 @@ public class CourseService {
         enrollment.setStudentId(enrollmentRequest.getStudentId());
         enrollment.setCourseId(enrollmentRequest.getCourseId());
         enrollment.setEnrollmentType(enrollmentRequest.getEnrollmentType());
-        enrollment.setEnrollmentDate(enrollmentRequest.getEnrollmentDate());
+        enrollment.setEnrollmentDate(LocalDate.now());
         enrollmentRepository.save(enrollment);
 
         // Fetch the enrolled course and return
@@ -70,5 +73,15 @@ public class CourseService {
     }
 
     public void deleteCourse(String courseId) {
+    }
+
+    public Course getCourseById(String courseId) {
+        return courseRepository.getCourseByCourseId(courseId);
+    }
+
+    public List<Course> getCoursesByCategory(Category category) {
+        List<Course> courses = new ArrayList<>();
+        courses = courseRepository.getAllCoursesByCategory(category);
+        return courses;
     }
 }

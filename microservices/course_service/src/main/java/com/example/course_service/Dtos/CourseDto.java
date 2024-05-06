@@ -1,5 +1,6 @@
 package com.example.course_service.Dtos;
 
+import com.example.course_service.Category;
 import lombok.Data;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -14,8 +15,8 @@ public class CourseDto {
     @Id
     private String courseId;
     private String courseName;
-    private String category;
-    private double courseDuration;
+    private Category category;
+    private String courseDuration;
     private String description;
     private String contentId;
     private String certificateId;
