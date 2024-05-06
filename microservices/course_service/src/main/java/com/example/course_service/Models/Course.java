@@ -1,5 +1,6 @@
 package com.example.course_service.Models;
 
+import com.example.course_service.Category;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,8 +17,8 @@ public class Course {
     @Id
     private String courseId;
     private String courseName;
-    private String category;
-    private double courseDuration;
+    private Category category;
+    private String courseDuration;
     private String description;
     private String contentId;
     private String certificateId;

@@ -1,5 +1,6 @@
 package com.example.course_service.Controllers;
 
+import com.example.course_service.Category;
 import com.example.course_service.Dtos.CourseDto;
 import com.example.course_service.Dtos.EnrollmentRequest;
 import com.example.course_service.Models.Course;
@@ -8,6 +9,7 @@ import com.example.course_service.Utils.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -26,6 +28,23 @@ public class CourseController {
     public ApiResponse<List<Course>> getAllCourses() {
         List<Course> courses = courseService.getAllCourses();
         return new ApiResponse<>(courses, 200, "Courses retrieved successfully");
+    }
+
+    @GetMapping("/{courseId}")
+    public ApiResponse<Course> getCourseById(@PathVariable String courseId) {
+        Course course = courseService.getCourseById(courseId);
+        return new ApiResponse<>(course, 200, "Course retrieved successfully");
+    }
+
+    @GetMapping("/category/{category}")
+    public ApiResponse<List<Course>> getCoursesByCategory(@PathVariable Category category) {
+        List<Course> courses = courseService.getCoursesByCategory(category);
+        return new ApiResponse<>(courses, 200, "Course retrieved successfully");
+    }
+
+    @GetMapping("/categories")
+    public List<Category> getAllCategories() {
+        return Arrays.asList(Category.values());
     }
 
     // Endpoint to create a new course
