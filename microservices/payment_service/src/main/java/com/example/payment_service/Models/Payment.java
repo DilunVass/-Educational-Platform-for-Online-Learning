@@ -20,4 +20,5 @@ public class Payment {
     private String expiryDate;
     private int cvc;
     private String name;
+    private double amount;
 }
