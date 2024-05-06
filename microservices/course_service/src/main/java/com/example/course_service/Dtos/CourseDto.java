@@ -20,4 +20,5 @@ public class CourseDto {
     private String description;
     private String contentId;
     private String certificateId;
+
 }
