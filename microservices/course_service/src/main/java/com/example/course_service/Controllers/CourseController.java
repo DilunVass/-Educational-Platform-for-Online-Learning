@@ -1,6 +1,7 @@
 package com.example.course_service.Controllers;
 
 import com.example.course_service.Dtos.CourseDto;
+import com.example.course_service.Dtos.EnrollmentRequest;
 import com.example.course_service.Models.Course;
 import com.example.course_service.Services.CourseService;
 import com.example.course_service.Utils.ApiResponse;
@@ -34,24 +35,24 @@ public class CourseController {
     }
 
     // Endpoint to update an existing course
-//    @PutMapping("/{courseId}")
-//    public Course updateCourse(@PathVariable String courseId, @RequestBody Course courseDetails) {
-//        return courseService.updateCourse(courseId, courseDetails);
-//    }
-//
-//    // Endpoint to delete a course
-//    @DeleteMapping("/{courseId}")
-//    public void deleteCourse(@PathVariable String courseId) {
-//        courseService.deleteCourse(courseId);
-//    }
-//
-//    // Endpoint to enroll a student in a course
-//    @PostMapping("/enroll")
-//    public void enrollStudent(@RequestBody EnrollmentRequest enrollmentRequest) {
-//        courseService.enrollStudent(enrollmentRequest);
-//    }
-//
-//    // Endpoint to track student progress
+    @PutMapping("/{courseId}")
+    public Course updateCourse(@PathVariable String courseId, @RequestBody Course courseDetails) {
+        return courseService.updateCourse(courseId, courseDetails);
+    }
+
+    // Endpoint to delete a course
+    @DeleteMapping("/{courseId}")
+    public void deleteCourse(@PathVariable String courseId) {
+        courseService.deleteCourse(courseId);
+    }
+
+    // Endpoint to enroll a student in a course
+    @PostMapping("/enroll")
+    public Course enrollStudent(@RequestBody EnrollmentRequest enrollmentRequest) {
+        return courseService.enrollStudent(enrollmentRequest);
+    }
+
+    // Endpoint to track student progress
 //    @GetMapping("/progress/{studentId}")
 //    public StudentProgress getStudentProgress(@PathVariable String studentId) {
 //        return courseService.getStudentProgress(studentId);
