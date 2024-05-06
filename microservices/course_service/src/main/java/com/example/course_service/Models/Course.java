@@ -17,7 +17,7 @@ public class Course {
     private String courseId;
     private String courseName;
     private String category;
-    private LocalDateTime learningTime;
+    private double courseDuration;
     private String description;
     private String contentId;
     private String certificateId;
