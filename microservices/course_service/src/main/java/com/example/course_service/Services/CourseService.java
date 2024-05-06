@@ -7,8 +7,12 @@ import com.example.course_service.Models.Course;
 import com.example.course_service.Models.Enrollment;
 import com.example.course_service.Repositories.CourseRepository;
 import com.example.course_service.Repositories.EnrollmentRepository;
+import com.mongodb.client.result.UpdateResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,9 +24,6 @@ import java.time.LocalDate;
 public class CourseService {
     @Autowired
     private CourseRepository courseRepository;
-
-    @Autowired
-    private EnrollmentRepository enrollmentRepository;
 
     @Autowired
     private MongoTemplate mongoTemplate;
@@ -49,27 +50,29 @@ public class CourseService {
         course.setDescription(courseDto.getDescription());
         course.setContentId(courseDto.getContentId());
         course.setCertificateId(courseDto.getCertificateId());
+        course.setInstructor(courseDto.getInstructor());
+        course.setPrice(courseDto.getPrice());
 
         // Save the course to the database
         return courseRepository.save(course);
     }
 
-    public Course enrollStudent(EnrollmentRequest enrollmentRequest) {
-
-        Enrollment enrollment = new Enrollment();
-        enrollment.setStudentId(enrollmentRequest.getStudentId());
-        enrollment.setCourseId(enrollmentRequest.getCourseId());
-        enrollment.setEnrollmentType(enrollmentRequest.getEnrollmentType());
-        enrollment.setEnrollmentDate(LocalDate.now());
-        enrollmentRepository.save(enrollment);
-
-        // Fetch the enrolled course and return
-        return courseRepository.findById(enrollmentRequest.getCourseId()).orElseThrow(() -> new IllegalArgumentException("Course not found"));
-    }
-
-
     public Course updateCourse(String courseId, Course courseDetails) {
-        return null;
+        Query query = new Query(Criteria.where("courseId").is(courseId));
+        Update update = new Update()
+                .set("courseName", courseDetails.getCourseName())
+                .set("description", courseDetails.getDescription())
+                .set("instructor", courseDetails.getInstructor())
+                .set("courseDuration", courseDetails.getCourseDuration())
+                .set("price", courseDetails.getPrice());
+
+        UpdateResult result = mongoTemplate.updateFirst(query, update, Course.class);
+
+        if (result.getModifiedCount() > 0) {
+            return courseDetails;
+        } else {
+            throw new IllegalArgumentException("Course with ID " + courseDetails.getCourseId() + " not exists.");
+        }
     }
 
     public void deleteCourse(String courseId) {
