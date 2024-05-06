@@ -13,14 +13,20 @@ public class PaymentService {
     private PaymentRepository paymentRepository;
 
     public Payment makePayment(PaymentDto paymentDto) {
-        Payment payment = new Payment();
-        payment.setCardNo(paymentDto.getCardNo());
-        payment.setName(paymentDto.getName());
-        payment.setExpiryDate(paymentDto.getExpiryDate());
-        payment.setCvc(paymentDto.getCvc());
+        double price = 0;
+        if(paymentDto.getAmount() < price){
+            throw new IllegalArgumentException("Payment can't proceed, make the full payment of" + price);
+        }else {
+            Payment payment = new Payment();
+            payment.setCardNo(paymentDto.getCardNo());
+            payment.setName(paymentDto.getName());
+            payment.setExpiryDate(paymentDto.getExpiryDate());
+            payment.setCvc(paymentDto.getCvc());
+            payment.setAmount(payment.getAmount());
 
-        paymentRepository.save(payment);
+            paymentRepository.save(payment);
 
-        return payment;
+            return payment;
+        }
     }
 }
