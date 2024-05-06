@@ -44,7 +44,6 @@ public class CourseService {
         // Convert CourseDto to Course
         Course course = new Course();
         course.setCourseName(courseDto.getCourseName());
-        course.setCourseId(courseDto.getCourseId());
         course.setCategory(courseDto.getCategory());
         course.setCourseDuration(courseDto.getCourseDuration());
         course.setDescription(courseDto.getDescription());
