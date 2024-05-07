@@ -20,5 +20,7 @@ public class CourseDto {
     private String description;
     private String contentId;
     private String certificateId;
+    private double price;
+    private String instructor;
 
 }

@@ -65,11 +65,7 @@ public class CourseController {
         courseService.deleteCourse(courseId);
     }
 
-    // Endpoint to enroll a student in a course
-    @PostMapping("/enroll")
-    public Course enrollStudent(@RequestBody EnrollmentRequest enrollmentRequest) {
-        return courseService.enrollStudent(enrollmentRequest);
-    }
+
 
     // Endpoint to track student progress
 //    @GetMapping("/progress/{studentId}")
