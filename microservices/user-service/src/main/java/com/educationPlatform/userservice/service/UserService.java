@@ -105,7 +105,36 @@ public class UserService {
     }
 
     //ADD user Coursers
-    
+//    public User addCourse(String userId, String courseId){
+//        Optional<User> exUser = userRepository.findUserBy_id(userId);
+//
+//
+//        if (exUser.isPresent()){
+//            User user = exUser.get();
+//
+//
+//            if (courseId != null){
+//                int numberOfCourses = user.getCourses().length;
+//                int i;
+//                for (i=0; i < numberOfCourses+1; i++){
+//
+//                }
+////                String[] pastCourses = user.getCourses();
+////                String[] newCourses = new String[0];
+////                int i=0;
+////                for (i=0; i<(pastCourses.length)+1; i++){
+////                    newCourses[i] = pastCourses[i];
+////                    if (i == pastCourses.length){
+////                        newCourses[i] = courseId;
+////                    }
+////                }
+////                user.setCourses(newCourses);
+//            }
+//            return userRepository.save(user);
+//        }else {
+//            throw new IllegalStateException("User not found");
+//        }
+//    }
 
 
 
