@@ -6,11 +6,11 @@ import com.educationPlatform.userservice.repository.UserRepository;
 import com.educationPlatform.userservice.util.ExtraUtilities;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -40,6 +40,74 @@ public class UserService {
             return ResponseEntity.internalServerError().body(e.getMessage());
         }
     }
+
+    public User getUser(String userId){
+        Optional<User> exUser = userRepository.findUserBy_id(userId);
+
+        if (exUser.isPresent()){
+            User user = exUser.get();
+            return user;
+        }else {
+            throw new IllegalStateException("User not found");
+        }
+    }
+
+    public List<User> getAllUsers(){
+        return userRepository.findAll();
+    }
+
+
+
+    public User updateUser(String userId, UserDTO userDTO){
+        Optional<User> exUser = userRepository.findUserBy_id(userId);
+
+        if (exUser.isPresent()){
+            User user = exUser.get();
+
+            if (userDTO.getFirstName() != null){
+                user.setFirstName(userDTO.getFirstName());
+            }
+            if (userDTO.getLastName() != null){
+                user.setLastName(userDTO.getLastName());
+            }
+            if (userDTO.getEmail() != null){
+                if (ExtraUtilities.isEmailValid(userDTO.getEmail())){
+                    user.setEmail(userDTO.getEmail());
+                }else {
+                    throw new IllegalStateException("Invalid email");
+                }
+            }
+            if (userDTO.getPassword() != null){
+                user.setPassword(userDTO.getPassword());
+            }
+
+            if (userDTO.getCourses() != null){
+                user.setCourses(userDTO.getCourses());
+            }
+
+            return userRepository.save(user);
+        }else {
+            throw new IllegalStateException("User not found");
+        }
+    }
+
+    public User deleteUser(String userId){
+        Optional<User> exUser = userRepository.findUserBy_id(userId);
+
+
+        if (exUser.isPresent()){
+            User deletedUser = exUser.get();
+            userRepository.deleteBy_id(userId);
+            return deletedUser;
+        }else {
+            throw new IllegalStateException("User not found");
+        }
+    }
+
+    //ADD user Coursers
+    
+
+
 
     private User map(UserDTO dto){
         return User.builder()
