@@ -25,4 +25,9 @@ export const protectedRoutes = [
         path: `${APP_PREFIX_PATH}/dashboards/userProfile`,
         component: React.lazy(() => import('views/app-views/dashboards/users/view users/profile')),
     },
+    {
+        key: 'dashboard-course-newCourse',
+        path: `${APP_PREFIX_PATH}/dashboards/course/new`,
+        component: React.lazy(() => import('views/app-views/dashboards/courses/new courses')),
+    },
 ]
