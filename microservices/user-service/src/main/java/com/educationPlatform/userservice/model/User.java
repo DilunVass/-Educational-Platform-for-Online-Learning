@@ -22,11 +22,17 @@ public class User {
     @Id
     private String _id;
 
+    @NotEmpty(message = "Username is required")
+    private String user_name;
+
     @NotEmpty(message = "First name is required")
-    private String firstName;
+    private String first_name;
 
     @NotEmpty(message = "Last name is required")
-    private String lastName;
+    private String last_name;
+
+    @NotEmpty(message = "Contact number is required")
+    private String contact_no;
 
     @Column(unique = true)
     @NotEmpty(message = "email is required.")
@@ -35,6 +41,9 @@ public class User {
 
     @NotEmpty(message = "Password is required")
     private String password;
+
+    @NotEmpty(message = "Profile picture is required")
+    private String base64ProfileImg;
 
     //courses ref
     private String[] courses;
