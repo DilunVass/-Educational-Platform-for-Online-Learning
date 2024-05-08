@@ -36,7 +36,7 @@ const RegisterForm = ({ onClose, open }) => {
 
     const handleSubmit = async() => {
         try {
-            axios.post(`${API_AUTH_URL}/api/user`, 
+            axios.post(`${API_AUTH_URL}/api/user/register`, 
             
                 userInfo
             )
@@ -44,7 +44,7 @@ const RegisterForm = ({ onClose, open }) => {
                 res => res.data)
             .then(res => {
                 console.log(res);
-                if(res.statusCode === "OK"){
+                if(res.statusCode === 201){
                     openNotificationWithIcon(
                         "success",
                         "User registered successfully!",
