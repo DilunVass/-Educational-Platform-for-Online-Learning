@@ -1,6 +1,7 @@
 package com.educationPlatform.userservice.service;
 
 import com.educationPlatform.userservice.dto.AuthenticationResponse;
+import com.educationPlatform.userservice.enums.UserRole;
 import com.educationPlatform.userservice.model.User;
 import com.educationPlatform.userservice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,8 @@ public class AuthService {
         user.setEmail(request.getEmail());
         user.setPassword(new BCryptPasswordEncoder().encode(request.getPassword()));
         user.setContact_no(request.getContact_no());
-        user.setUserRole(request.getUserRole());
+//        user.setUserRole(request.getUserRole());
+        user.setUserRole(UserRole.ADMIN);
 
         user = userRepository.save(user);
 

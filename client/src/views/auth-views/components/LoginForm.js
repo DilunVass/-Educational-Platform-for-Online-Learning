@@ -52,95 +52,99 @@ export const LoginForm = (props) => {
     } = props;
 
     const initialCredential = {
-        user_name: "",
+        eamil: "",
         password: "",
     };
 
     const signIn = async (data) => {
         try {
-            // const response = await axios.post(
-            //     `${API_AUTH_URL}/api/auth/signin`,
-            //     {
-            //         "userCredentials" : {
-            //             user_name: `${data.user_name}`,
-            //             password: `${data.password}`,
-            //         }
-            //     },
-            //     {
-            //         headers: {
-            //             "Content-Type": "application/json",
-            //             Accept: "text/plain",
-            //             "Access-Control-Allow-Origin": "*",
-            //         },
-            //     }
-            // );
-            // console.log(response.data);
-
-            // if (response.data.status === "Fail") {
-            //     setShowMessage("Invalid User name or Password !");
-            //     setTimeout(() => {
-            //         setShowMessage("");
-            //         dispatch(stopLoading());
-            //     }, 1500);
-            // } else if (response.data.status === "Success") {
-
-            //     setCookie(
-            //         "isDefaultPassword",
-            //         response.data.isDefaultPassword === true? 'true' : 'false',
-            //         { path: "/", expires: new Date(Date.now() + 3600e3) }
-            //     );
-            //     setCookie("token", response.data.token, {
-            //         path: "/",
-            //         expires: new Date(Date.now() + 3600e3),
-            //     });
-            //     setCookie("userId", response.data.id, {
-            //         path: "/",
-            //         expires: new Date(Date.now() + 3600e3),
-            //     });
-            //     setCookie("userRole", response.data.role, {
-            //         path: "/",
-            //         expires: new Date(Date.now() + 3600e3),
-            //     });
-            //     setCookie("userFirstName", response.data.first_name, {
-            //         path: "/",
-            //         expires: new Date(Date.now() + 3600e3),
-            //     });
-            //     setCookie("userLastName", response.data.last_name, {
-            //         path: "/",
-            //         expires: new Date(Date.now() + 3600e3),
-            //     });
-			// 	setCookie("userImage", response.data.profilePicture, {
-            //         path: "/",
-            //         expires: new Date(Date.now() + 3600e3),
-            //     });
-            //     setCookie("isDarkMode", response.data.isDarkMode === true? 'dark' : 'light'
-			// 	, {
-            //         path: "/",
-            //         expires: new Date(Date.now() + 3600e3),
-            //     });
-
-            //     dispatch(signInSuccess(response.data.token));
-            //     dispatch(
-            //         setIsDefaultPassword(
-            //             response.data.isDefaultPassword === true? 'true' : 'false'
-            //         )
-            //     );
+            const response = await axios.post(
+                `${API_AUTH_URL}/api/user/login`,
+                {
+                    email: `${data.email}`,
+                    password: `${data.password}`,
+                },
+                // {
                 
-			// 	dispatch(setUserImage(response.data.profilePicture));
-			// 	dispatch(onSwitchTheme(response.data.isDarkMode === true? 'dark' : 'light'));
-            //     dispatch(setUserId(response.data.id));
-            //     dispatch(setUserFirstName(response.data.first_name));
-            //     dispatch(setUserLastName(response.data.last_name));
-            //     dispatch(setUserRole(response.data.role));
+                //         email: `${data.email}`,
+                //         password: `${data.password}`,
+                    
+                // },
+                // {
+                //     headers: {
+                //         "Content-Type": "application/json",
+                //         Accept: "text/plain",
+                //         "Access-Control-Allow-Origin": "*",
+                //     },
+                // }
+            );
+            console.log(response.data);
 
-            //     navigate("/");
-            // } else {
-            //     setShowMessage("Error Occured !");
-            //     setTimeout(() => {
-            //         setShowMessage("");
-            //         dispatch(stopLoading());
-            //     }, 1500);
-            // }
+            if (response.data.status === "Fail") {
+                setShowMessage("Invalid User name or Password !");
+                setTimeout(() => {
+                    setShowMessage("");
+                    dispatch(stopLoading());
+                }, 1500);
+            } else if (response.data.status === "Success") {
+
+                setCookie(
+                    "isDefaultPassword",
+                    response.data.isDefaultPassword === true? 'true' : 'false',
+                    { path: "/", expires: new Date(Date.now() + 3600e3) }
+                );
+                setCookie("token", response.data.token, {
+                    path: "/",
+                    expires: new Date(Date.now() + 3600e3),
+                });
+                setCookie("userId", response.data.id, {
+                    path: "/",
+                    expires: new Date(Date.now() + 3600e3),
+                });
+                setCookie("userRole", response.data.role, {
+                    path: "/",
+                    expires: new Date(Date.now() + 3600e3),
+                });
+                setCookie("userFirstName", response.data.first_name, {
+                    path: "/",
+                    expires: new Date(Date.now() + 3600e3),
+                });
+                setCookie("userLastName", response.data.last_name, {
+                    path: "/",
+                    expires: new Date(Date.now() + 3600e3),
+                });
+				setCookie("userImage", response.data.profilePicture, {
+                    path: "/",
+                    expires: new Date(Date.now() + 3600e3),
+                });
+                setCookie("isDarkMode", response.data.isDarkMode === true? 'dark' : 'light'
+				, {
+                    path: "/",
+                    expires: new Date(Date.now() + 3600e3),
+                });
+
+                dispatch(signInSuccess(response.data.token));
+                dispatch(
+                    setIsDefaultPassword(
+                        response.data.isDefaultPassword === true? 'true' : 'false'
+                    )
+                );
+                
+				dispatch(setUserImage(response.data.profilePicture));
+				dispatch(onSwitchTheme(response.data.isDarkMode === true? 'dark' : 'light'));
+                dispatch(setUserId(response.data.id));
+                dispatch(setUserFirstName(response.data.first_name));
+                dispatch(setUserLastName(response.data.last_name));
+                dispatch(setUserRole(response.data.role));
+
+                navigate("/");
+            } else {
+                setShowMessage("Error Occured !");
+                setTimeout(() => {
+                    setShowMessage("");
+                    dispatch(stopLoading());
+                }, 1500);
+            }
 
 
             setCookie(
@@ -258,12 +262,12 @@ export const LoginForm = (props) => {
                 onFinish={onLogin}
             >
                 <Form.Item
-                    name="user_name"
-                    label="User Name"
+                    name="email"
+                    label="Email"
                     rules={[
                         {
                             required: true,
-                            message: "Please input your user name",
+                            message: "Please input your email",
                         },
                     ]}
                 >
