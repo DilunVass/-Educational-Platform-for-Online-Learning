@@ -1,4 +1,4 @@
 # NexTutor - Educational-Platform-for-Online-Learning
 
-## thwa dawas 2i ah..
+## thwa dawas 1i ah..
 
