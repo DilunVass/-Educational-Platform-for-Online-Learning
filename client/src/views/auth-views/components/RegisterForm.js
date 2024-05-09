@@ -36,7 +36,7 @@ const RegisterForm = ({ onClose, open }) => {
 
     const handleSubmit = async() => {
         try {
-            axios.post(`${API_AUTH_URL}/api/user/register`, 
+            axios.post(`${API_AUTH_URL}/user_service/api/user/register`, 
             
                 userInfo
             )

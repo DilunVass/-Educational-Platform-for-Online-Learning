@@ -27,19 +27,19 @@ public class CourseController {
     @GetMapping
     public ApiResponse<List<Course>> getAllCourses() {
         List<Course> courses = courseService.getAllCourses();
-        return new ApiResponse<>(courses, 200, "Courses retrieved successfully");
+        return new ApiResponse<>(courses, "success", "Courses retrieved successfully");
     }
 
     @GetMapping("/{courseId}")
     public ApiResponse<Course> getCourseById(@PathVariable String courseId) {
         Course course = courseService.getCourseById(courseId);
-        return new ApiResponse<>(course, 200, "Course retrieved successfully");
+        return new ApiResponse<>(course, "success", "Course retrieved successfully");
     }
 
     @GetMapping("/category/{category}")
     public ApiResponse<List<Course>> getCoursesByCategory(@PathVariable Category category) {
         List<Course> courses = courseService.getCoursesByCategory(category);
-        return new ApiResponse<>(courses, 200, "Course retrieved successfully");
+        return new ApiResponse<>(courses, "success", "Course retrieved successfully");
     }
 
     @GetMapping("/categories")
@@ -49,8 +49,13 @@ public class CourseController {
 
     // Endpoint to create a new course
     @PostMapping
-    public Course createCourse(@RequestBody CourseDto courseDto) {
-        return courseService.createCourse(courseDto);
+    public ApiResponse<Course> createCourse(@RequestBody CourseDto courseDto) {
+        Course course = courseService.createCourse(courseDto);
+        if(course != null){
+            return new ApiResponse<>(course, "success", "Course Added successfully");
+        }else{
+            return new ApiResponse<>(null, "error", "Invalid course data");
+        }
     }
 
     // Endpoint to update an existing course
