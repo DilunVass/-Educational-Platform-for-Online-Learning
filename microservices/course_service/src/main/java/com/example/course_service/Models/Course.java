@@ -9,6 +9,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -21,7 +22,7 @@ public class Course {
     private Category category;
     private String courseDuration;
     private String description;
-    private String contentId;
+    private List<String> sectionIds;
     private String certificateId;
     private double price;
     private String instructor;
