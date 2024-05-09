@@ -78,7 +78,8 @@ export const LoginForm = (props) => {
                 //     },
                 // }
             );
-            console.log(response.data);
+            // console.log(response.data.data.token);
+            // console.log(response.data.userData._id);
 
             if (response.data.status === "Fail") {
                 setShowMessage("Invalid User name or Password !");
@@ -86,34 +87,35 @@ export const LoginForm = (props) => {
                     setShowMessage("");
                     dispatch(stopLoading());
                 }, 1500);
-            } else if (response.data.status === "Success") {
+            } else if (response.data.statusCode === 201) {
 
+                console.log(response.data);
                 setCookie(
                     "isDefaultPassword",
                     response.data.isDefaultPassword === true? 'true' : 'false',
                     { path: "/", expires: new Date(Date.now() + 3600e3) }
                 );
-                setCookie("token", response.data.token, {
+                setCookie("token", response.data.data.token, {
                     path: "/",
                     expires: new Date(Date.now() + 3600e3),
                 });
-                setCookie("userId", response.data.id, {
+                setCookie("userId", response.data.userData._id, {
                     path: "/",
                     expires: new Date(Date.now() + 3600e3),
                 });
-                setCookie("userRole", response.data.role, {
+                setCookie("userRole", response.data.userData.userRole, {
                     path: "/",
                     expires: new Date(Date.now() + 3600e3),
                 });
-                setCookie("userFirstName", response.data.first_name, {
+                setCookie("userFirstName", response.data.userData.first_name, {
                     path: "/",
                     expires: new Date(Date.now() + 3600e3),
                 });
-                setCookie("userLastName", response.data.last_name, {
+                setCookie("userLastName", response.data.userData.last_name, {
                     path: "/",
                     expires: new Date(Date.now() + 3600e3),
                 });
-				setCookie("userImage", response.data.profilePicture, {
+				setCookie("userImage", response.data.userData.base64ProfileImg, {
                     path: "/",
                     expires: new Date(Date.now() + 3600e3),
                 });
@@ -130,12 +132,15 @@ export const LoginForm = (props) => {
                     )
                 );
                 
-				dispatch(setUserImage(response.data.profilePicture));
-				dispatch(onSwitchTheme(response.data.isDarkMode === true? 'dark' : 'light'));
-                dispatch(setUserId(response.data.id));
-                dispatch(setUserFirstName(response.data.first_name));
-                dispatch(setUserLastName(response.data.last_name));
-                dispatch(setUserRole(response.data.role));
+                dispatch(setUserImage("34343"));
+                dispatch(onSwitchTheme('dark'));
+				// dispatch(setUserImage(response.data.userData.base64ProfileImg));
+				// dispatch(onSwitchTheme(response.data.isDarkMode === true? 'dark' : 'light'));
+                dispatch(setUserId(response.data.userData._id));
+                dispatch(setUserFirstName(response.data.userData.first_name));
+                dispatch(setUserLastName(response.data.userData.last_name));
+                //dispatch(setUserRole("Admin"));
+                dispatch(setUserRole(response.data.userData.userRole));
 
                 navigate("/");
             } else {
@@ -168,10 +173,10 @@ export const LoginForm = (props) => {
                 path: "/",
                 expires: new Date(Date.now() + 3600e3),
             });
-            setCookie("userLastName", "Marasinghe", {
-                path: "/",
-                expires: new Date(Date.now() + 3600e3),
-            });
+            // setCookie("userLastName", "Marasinghe", {
+            //     path: "/",
+            //     expires: new Date(Date.now() + 3600e3),
+            // });
             setCookie("userImage", "ererer", {
                 path: "/",
                 expires: new Date(Date.now() + 3600e3),
@@ -192,8 +197,8 @@ export const LoginForm = (props) => {
             dispatch(setUserImage("34343"));
             dispatch(onSwitchTheme('dark'));
             dispatch(setUserId(12));
-            dispatch(setUserFirstName("Chamalka"));
-            dispatch(setUserLastName("Marasinghe"));
+            // dispatch(setUserFirstName("Chamalka"));
+            // dispatch(setUserLastName("Marasinghe"));
             dispatch(setUserRole("Admin"));
             navigate("/");
 

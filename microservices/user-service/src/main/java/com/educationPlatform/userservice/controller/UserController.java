@@ -3,15 +3,18 @@ package com.educationPlatform.userservice.controller;
 import com.educationPlatform.userservice.dto.AuthenticationResponse;
 import com.educationPlatform.userservice.dto.UserDTO;
 import com.educationPlatform.userservice.model.User;
+import com.educationPlatform.userservice.repository.UserRepository;
 import com.educationPlatform.userservice.service.AuthService;
 import com.educationPlatform.userservice.service.UserService;
 import com.educationPlatform.userservice.util.ApiResponse;
+import com.educationPlatform.userservice.util.LoginResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/user")
@@ -19,6 +22,9 @@ public class UserController {
 
     @Autowired
     private UserService service;
+    
+    @Autowired
+    private UserRepository userRepository;
 
     public UserController(UserService service, AuthService authService) {
         this.service = service;
@@ -75,10 +81,18 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthenticationResponse> login(
+    public LoginResponse<AuthenticationResponse, User> login(
             @RequestBody User request
+            
     ){
-        return ResponseEntity.ok(authService.authenticate(request));
+        User user = null;
+        AuthenticationResponse response = authService.authenticate(request);
+        if (response != null){
+            Optional<User> ex = userRepository.findUserByEmail(request.getEmail());
+            user = ex.get();
+        }
+//        ResponseEntity.ok(authService.authenticate(request));
+        return new LoginResponse<>(response,user, 201,"user login success");
     }
 
 //    @PutMapping("/{id}")

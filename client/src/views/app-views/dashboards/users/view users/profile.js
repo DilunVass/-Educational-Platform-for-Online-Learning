@@ -63,6 +63,8 @@ const EditUser = () => {
         useSelector((state) => state.auth);
     const { currentTheme } = useSelector(state => state.theme);
 
+    console.log(token)
+
     // const location = useLocation();
     // const searchParams = new URLSearchParams(location.search);
     // const userObj = searchParams.get("user");
