@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+import static com.educationPlatform.userservice.enums.UserRole.ADMIN;
+
 @Service
 @AllArgsConstructor
 public class UserService {
@@ -58,51 +60,51 @@ public class UserService {
 
 
 
-    public User updateUser(String userId, UserDTO userDTO){
-        Optional<User> exUser = userRepository.findUserBy_id(userId);
-
-        if (exUser.isPresent()){
-            User user = exUser.get();
-
-            if (userDTO.getFirstName() != null){
-                user.setFirstName(userDTO.getFirstName());
-            }
-            if (userDTO.getLastName() != null){
-                user.setLastName(userDTO.getLastName());
-            }
-            if (userDTO.getEmail() != null){
-                if (ExtraUtilities.isEmailValid(userDTO.getEmail())){
-                    user.setEmail(userDTO.getEmail());
-                }else {
-                    throw new IllegalStateException("Invalid email");
-                }
-            }
-            if (userDTO.getPassword() != null){
-                user.setPassword(userDTO.getPassword());
-            }
-
-            if (userDTO.getCourses() != null){
-                user.setCourses(userDTO.getCourses());
-            }
-
-            return userRepository.save(user);
-        }else {
-            throw new IllegalStateException("User not found");
-        }
-    }
-
-    public User deleteUser(String userId){
-        Optional<User> exUser = userRepository.findUserBy_id(userId);
-
-
-        if (exUser.isPresent()){
-            User deletedUser = exUser.get();
-            userRepository.deleteBy_id(userId);
-            return deletedUser;
-        }else {
-            throw new IllegalStateException("User not found");
-        }
-    }
+//    public User updateUser(String userId, UserDTO userDTO){
+//        Optional<User> exUser = userRepository.findUserBy_id(userId);
+//
+//        if (exUser.isPresent()){
+//            User user = exUser.get();
+//
+//            if (userDTO.getFirstName() != null){
+//                user.setFirstName(userDTO.getFirstName());
+//            }
+//            if (userDTO.getLastName() != null){
+//                user.setLastName(userDTO.getLastName());
+//            }
+//            if (userDTO.getEmail() != null){
+//                if (ExtraUtilities.isEmailValid(userDTO.getEmail())){
+//                    user.setEmail(userDTO.getEmail());
+//                }else {
+//                    throw new IllegalStateException("Invalid email");
+//                }
+//            }
+//            if (userDTO.getPassword() != null){
+//                user.setPassword(userDTO.getPassword());
+//            }
+//
+//            if (userDTO.getCourses() != null){
+//                user.setCourses(userDTO.getCourses());
+//            }
+//
+//            return userRepository.save(user);
+//        }else {
+//            throw new IllegalStateException("User not found");
+//        }
+//    }
+//
+//    public User deleteUser(String userId){
+//        Optional<User> exUser = userRepository.findUserBy_id(userId);
+//
+//
+//        if (exUser.isPresent()){
+//            User deletedUser = exUser.get();
+//            userRepository.deleteBy_id(userId);
+//            return deletedUser;
+//        }else {
+//            throw new IllegalStateException("User not found");
+//        }
+//    }
 
     //ADD user Coursers
 //    public User addCourse(String userId, String courseId){
@@ -140,11 +142,14 @@ public class UserService {
 
     private User map(UserDTO dto){
         return User.builder()
-                .firstName(dto.getFirstName())
-                .lastName(dto.getLastName())
-                .email(dto.getEmail())
+                .user_name(dto.getUser_name())
+                .first_name(dto.getFirst_name())
+                .last_name(dto.getLast_name())
+                .contact_no(dto.getContact_no())
+                .email(dto.getContact_no())
                 .password(dto.getPassword())
-                .userRole(dto.getUserRole())
+                .base64ProfileImg(dto.getBase64ProfileImg())
+                .userRole(ADMIN)
                 .build();
     }
 }
