@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProgressDto {
-
     private String studentId;
     private String courseId;
     private double noOfSections;
