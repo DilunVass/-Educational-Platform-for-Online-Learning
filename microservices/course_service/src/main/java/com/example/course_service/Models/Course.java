@@ -17,7 +17,7 @@ import java.util.List;
 @Document(collection = "courses")
 public class Course {
     @Id
-    private ObjectId courseId;
+    private String courseId;
     private String courseName;
     private Category category;
     private String courseDuration;
