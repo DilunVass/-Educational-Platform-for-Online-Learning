@@ -2,9 +2,9 @@ package com.example.course_service.Controllers;
 
 import com.example.course_service.Category;
 import com.example.course_service.Dtos.CourseDto;
-import com.example.course_service.Dtos.EnrollmentRequest;
 import com.example.course_service.Models.Course;
 import com.example.course_service.Services.CourseService;
+import com.example.course_service.ServicesImpl.CourseServiceImpl;
 import com.example.course_service.Utils.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,11 +17,11 @@ import java.util.List;
 public class CourseController {
 
     @Autowired
-    private final CourseService courseService;
+    private CourseService courseService;
 
-    public CourseController(CourseService courseService){
-        this.courseService = courseService;
-    }
+//    public CourseController(CourseServiceImpl courseServiceImpl){
+//        this.courseService = courseService;
+//    }
 
     // Endpoint to display a wide range of courses
     @GetMapping
