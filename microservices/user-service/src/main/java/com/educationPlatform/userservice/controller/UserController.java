@@ -95,16 +95,16 @@ public class UserController {
         return new LoginResponse<>(response,user, 201,"user login success");
     }
 
-//    @PutMapping("/{id}")
-//    public ResponseEntity<Object> updateUser(@PathVariable("id") String userId, @RequestBody UserDTO userDTO){
-//        User updateUser = service.updateUser(userId, userDTO);
-//
-//        if (userDTO != null){
-//            return ResponseEntity.ok(updateUser);
-//        }else {
-//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-//        }
-//    }
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> updateUser(@PathVariable("id") String userId, @RequestBody User userDTO){
+        ApiResponse res = service.updateUser(userId, userDTO);
+
+        if (userDTO != null){
+            return ResponseEntity.ok(res);
+        }else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+    }
 //
 //    @DeleteMapping("/{id}")
 //    public ResponseEntity<Object> deleteUser(@PathVariable("id") String userId){

@@ -3,6 +3,7 @@ package com.educationPlatform.userservice.service;
 import com.educationPlatform.userservice.dto.UserDTO;
 import com.educationPlatform.userservice.model.User;
 import com.educationPlatform.userservice.repository.UserRepository;
+import com.educationPlatform.userservice.util.ApiResponse;
 import com.educationPlatform.userservice.util.ExtraUtilities;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,38 +61,41 @@ public class UserService {
 
 
 
-//    public User updateUser(String userId, UserDTO userDTO){
-//        Optional<User> exUser = userRepository.findUserBy_id(userId);
-//
-//        if (exUser.isPresent()){
-//            User user = exUser.get();
-//
-//            if (userDTO.getFirstName() != null){
-//                user.setFirstName(userDTO.getFirstName());
-//            }
-//            if (userDTO.getLastName() != null){
-//                user.setLastName(userDTO.getLastName());
-//            }
-//            if (userDTO.getEmail() != null){
-//                if (ExtraUtilities.isEmailValid(userDTO.getEmail())){
-//                    user.setEmail(userDTO.getEmail());
-//                }else {
-//                    throw new IllegalStateException("Invalid email");
-//                }
-//            }
-//            if (userDTO.getPassword() != null){
-//                user.setPassword(userDTO.getPassword());
-//            }
-//
-//            if (userDTO.getCourses() != null){
-//                user.setCourses(userDTO.getCourses());
-//            }
-//
-//            return userRepository.save(user);
-//        }else {
-//            throw new IllegalStateException("User not found");
-//        }
-//    }
+    public ApiResponse<User> updateUser(String userId, User updateUser){
+        Optional<User> exUser = userRepository.findUserBy_id(userId);
+        User user = exUser.get();
+        if (exUser.isPresent()){
+            user = exUser.get();
+
+            if (updateUser.getUser_name() != null){
+                user.setUser_name(updateUser.getUser_name());
+            }
+            if (updateUser.getFirst_name() != null){
+                user.setFirst_name(updateUser.getFirst_name());
+            }
+            if (updateUser.getLast_name() != null){
+                user.setLast_name(updateUser.getLast_name());
+            }
+            if (updateUser.getEmail() != null){
+                user.setEmail(updateUser.getEmail());
+            }
+            if (updateUser.getPassword() != null){
+                user.setPassword(updateUser.getPassword());
+            }
+            if (updateUser.getContact_no() != null){
+                user.setContact_no(updateUser.getContact_no());
+            }
+            if (updateUser.getBase64ProfileImg() != null){
+                user.setBase64ProfileImg(updateUser.getBase64ProfileImg());
+            }
+
+            return new ApiResponse<>(user, 200, "User Updated");
+        }
+        else {
+            new ApiResponse<>(updateUser, 404, "user update failed");
+        }
+        return new ApiResponse<>(user, 200, "User Updated");
+    }
 //
 //    public User deleteUser(String userId){
 //        Optional<User> exUser = userRepository.findUserBy_id(userId);
