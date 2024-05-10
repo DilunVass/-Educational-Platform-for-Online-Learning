@@ -7,6 +7,9 @@ import ProtectedRoute from './ProtectedRoute';
 import PublicRoute from './PublicRoute';
 import AppRoute from './AppRoute';
 
+import 'bootstrap/dist/css/bootstrap.css';
+import CourseView from 'views/app-views/dashboards/courses/new courses/courseView';
+
 const Routes = () => {
 
 	const { token } = useSelector(state => state.auth)
@@ -49,6 +52,7 @@ const Routes = () => {
 					)
 				})}
 			</Route>
+			<Route path='/coursetest' element={<CourseView />} />
 		</RouterRoutes>
 	)
 }
