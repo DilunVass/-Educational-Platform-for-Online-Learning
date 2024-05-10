@@ -32,15 +32,21 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public Course createCourse(CourseDto courseDto) {
-        // Check if the course already exists
-//        Query query = new Query(Criteria.where("courseId").is(courseDto.getCourseId()));
-        Optional<Course> existingCourse = courseRepository.findById(courseDto.getCourseId());
+
+        Optional<Course> existingCourse = courseRepository.findByCourseName(courseDto.getCourseName());
 
         if (existingCourse.isPresent()) {
-            throw new IllegalArgumentException("Course with ID " + courseDto.getCourseId() + " already exists.");
+            throw new IllegalArgumentException("Course with ID " + courseDto.getCourseName() + " already exists.");
         }
 
         // Convert CourseDto to Course
+        Course course = getCourse(courseDto);
+
+        // Save the course to the database
+        return courseRepository.save(course);
+    }
+
+    private static Course getCourse(CourseDto courseDto) {
         Course course = new Course();
         course.setCourseName(courseDto.getCourseName());
         course.setCategory(courseDto.getCategory());
@@ -50,9 +56,7 @@ public class CourseServiceImpl implements CourseService {
         course.setCertificateId(courseDto.getCertificateId());
         course.setInstructor(courseDto.getInstructor());
         course.setPrice(courseDto.getPrice());
-
-        // Save the course to the database
-        return courseRepository.save(course);
+        return course;
     }
 
     @Override
