@@ -2,8 +2,8 @@ package com.example.course_service.Controllers;
 
 import com.example.course_service.Dtos.EnrollmentRequest;
 import com.example.course_service.Models.Course;
-import com.example.course_service.Services.CourseService;
 import com.example.course_service.Services.EnrollmentService;
+import com.example.course_service.ServicesImpl.EnrollmentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
