@@ -12,7 +12,7 @@ function MainContent() {
         p: 3,
         width: { sm: `calc(100% - ${drawerWidth}px)` },
         paddingTop: 8,
-        marginLeft: '200px', // Adjust marginLeft if necessary
+        // marginLeft: '100px', // Adjust marginLeft if necessary
       }}
     >
       <Toolbar />
