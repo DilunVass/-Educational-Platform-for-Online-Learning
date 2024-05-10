@@ -36,9 +36,12 @@ const RegisterForm = ({ onClose, open }) => {
 
     const handleSubmit = async() => {
         try {
-            axios.post(`${API_AUTH_URL}/user_service/api/user/register`, 
+            axios.post("http://localhost:8087/api/user/register", 
             
-                userInfo
+                userInfo, 
+                {
+                    withCredentials: true
+                }
             )
             .then( 
                 res => res.data)
