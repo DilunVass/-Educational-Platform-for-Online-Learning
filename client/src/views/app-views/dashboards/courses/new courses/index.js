@@ -38,11 +38,11 @@ const NewCourse = () => {
     const { currentTheme } = useSelector(state => state.theme); 
     const { token } = theme.useToken();
     const [current, setCurrent] = useState(0);
-    //const [optionsCustom, setOptionsCustom] = useState([]);
+    const [optionsCustom, setOptionsCustom] = useState([]);
 
-    const optionsCustom = [
-        "IT", "Engineering", "Accounting", "Programming"
-    ]
+    // const optionsCustom = [
+    //     "IT", "Engineering", "Accounting", "Programming"
+    // ]
 
     //const [imgFile, setImgFile] = useState(null);
     //const [imgFilePreview, setImgFilePreview] = useState(null);
@@ -50,7 +50,7 @@ const NewCourse = () => {
     const [courseInfo, setCourseInfo] = useState({
         courseName: "",
         category: null,
-        duration: "",
+        courseduration: "",
         description: "",
         price: "",
         instructor: ""
@@ -94,8 +94,8 @@ const NewCourse = () => {
             console.log(courseInfo);
             axios.post(`http://localhost:8085/api/courses`, courseInfo)
             .then(res => {
-                // console.log(res);
-                if(res.status === "success"){
+                console.log(res.status);
+                if(res.status === 200){
                     openNotificationWithIcon(
                         "success",
                         "Successfully Created",
@@ -133,17 +133,17 @@ const NewCourse = () => {
         console.log(content);
     }
 
-    // useEffect(() => {
-    //     axios.get(`http://localhost:8083/api/courses/categories`)
-    //     .then(res => {
-    //         //console.log(res);
-    //         setOptionsCustom(res.data);
-    //     })
-    //     .catch(err => {
-    //         console.log(err);
-    //         setOptionsCustom([]);
-    //     })
-    // }, [])
+    useEffect(() => {
+        axios.get(`http://localhost:8085/api/courses/categories`)
+        .then(res => {
+            //console.log(res);
+            setOptionsCustom(res.data);
+        })
+        .catch(err => {
+            console.log(err);
+            setOptionsCustom([]);
+        })
+    }, [])
 
     const items = [
         {
@@ -202,7 +202,7 @@ const NewCourse = () => {
                                 <Form.Item
                                     label="Duration"
                                 >
-                                    <Input placeholder="Course Duration" value={courseInfo.duration} onChange={(e) => {setCourseInfo({...courseInfo, duration: e.target.value})}}/>
+                                    <Input placeholder="Course Duration" value={courseInfo.courseduration} onChange={(e) => {setCourseInfo({...courseInfo, courseduration: e.target.value})}}/>
                                 </Form.Item>
                             </Form.Item>
                             
