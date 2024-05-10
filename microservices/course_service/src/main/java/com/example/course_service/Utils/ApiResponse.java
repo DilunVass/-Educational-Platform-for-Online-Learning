@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ApiResponse<T> {
     // Getters and setters
-    private T data;
-    private int statusCode;
+    private Object data;
+    private String status;
     private String message;
 
 //    public ApiResponse(T data, int statusCode, String message) {

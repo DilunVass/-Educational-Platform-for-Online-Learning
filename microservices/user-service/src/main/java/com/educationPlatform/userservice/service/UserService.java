@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+import static com.educationPlatform.userservice.enums.UserRole.ADMIN;
+
 @Service
 @AllArgsConstructor
 public class UserService {
@@ -147,7 +149,7 @@ public class UserService {
                 .email(dto.getContact_no())
                 .password(dto.getPassword())
                 .base64ProfileImg(dto.getBase64ProfileImg())
-                .userRole("admin")
+                .userRole(ADMIN)
                 .build();
     }
 }

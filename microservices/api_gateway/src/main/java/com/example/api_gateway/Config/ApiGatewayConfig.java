@@ -11,9 +11,13 @@ public class ApiGatewayConfig {
     @Bean
     public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
         return builder.routes()
-                .route("service1_route", r -> r.path("/api/courses/**")
+                .route("user_service", r -> r.path("/api/user/**")
+                        .uri("http://localhost:8087"))
+                .route("content_service", r -> r.path("/api/content/**")
+                        .uri("http://localhost:8089"))
+                .route("course_service", r -> r.path("/api/courses/**")
                         .uri("http://localhost:8083"))
-                .route("service2_route", r -> r.path("/api/payments/**")
+                .route("payment_service", r -> r.path("/api/payments/**")
                         .uri("http://localhost:8084"))
                 .build();
     }

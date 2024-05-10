@@ -63,10 +63,38 @@ const EditUser = () => {
         useSelector((state) => state.auth);
     const { currentTheme } = useSelector(state => state.theme);
 
+    // console.log(token)
+
     // const location = useLocation();
     // const searchParams = new URLSearchParams(location.search);
     // const userObj = searchParams.get("user");
     // const user = JSON.parse(userObj);
+
+    const [userData, setUserData] = useState({});
+
+    
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(`${API_BASE_URL}/api/user/${userId}`, {
+                    headers: {
+                        "Authorization": `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+            
+                setUserData(response.data);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+
+        fetchData();
+    }, [userId, token]); // Make sure to include dependencies
+
+    console.log(userData.user_name);
+    
+
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -319,28 +347,28 @@ const EditUser = () => {
         };
     }, []);
 
-    useEffect(() => {
-        const loadUserInfo = async () => {
-            axios
-                .get(`${API_BASE_URL}/api/Auth/GetuserbyID/${userId}`, {
-                    headers: {
-                        AccessToken: token,
-                        "Content-Type": "application/json",
-                        Accept: "text/plain",
-                    },
-                })
-                .then((response) => response.data)
-                .then((data) => {
-                    setUserInfo(data.user);
-                })
-                .catch((error) => {
-                    console.error("Error fetching data:", error);
-                });
-        };
-        loadUserInfo();
-    }, []);
+    // useEffect(() => {
+    //     const loadUserInfo = async () => {
+    //         axios
+    //             .get(`${API_BASE_URL}/api/Auth/GetuserbyID/${userId}`, {
+    //                 headers: {
+    //                     AccessToken: token,
+    //                     "Content-Type": "application/json",
+    //                     Accept: "text/plain",
+    //                 },
+    //             })
+    //             .then((response) => response.data)
+    //             .then((data) => {
+    //                 setUserInfo(data.user);
+    //             })
+    //             .catch((error) => {
+    //                 console.error("Error fetching data:", error);
+    //             });
+    //     };
+    //     loadUserInfo();
+    // }, []);
 
-    console.log(userInfo);
+    // console.log(userInfo);
     return (
         <>
             <div>
@@ -388,7 +416,7 @@ const EditUser = () => {
                                     label="User Name"
                                     //hasFeedback
                                     validateStatus={
-                                        userInfo.user_name !== ""
+                                        userData.user_name !== ""
                                             ? "success"
                                             : "error"
                                     }
@@ -398,14 +426,14 @@ const EditUser = () => {
                                     <Input
                                         placeholder="User Name"
                                         id="error"
-                                        value={userInfo.user_name}
+                                        value={userData.user_name}
                                         onChange={(e) => {
                                             setUserInfo({
-                                                ...userInfo,
-                                                user_name: e.target.value.trim(),
+                                                ...userData,
+                                                userData: e.target.value.trim(),
                                             });
                                         }}
-                                        disabled={true}
+                                        // disabled={true}
                                     />
                                 </Form.Item>
 
@@ -419,7 +447,7 @@ const EditUser = () => {
                                         label="First Name"
                                         //hasFeedback
                                         validateStatus={
-                                            userInfo.first_name !== ""
+                                            userData.first_name !== ""
                                                 ? "success"
                                                 : "error"
                                         }
@@ -433,21 +461,21 @@ const EditUser = () => {
                                         <Input
                                             placeholder="First Name"
                                             id="error"
-                                            value={userInfo.first_name}
+                                            value={userData.first_name}
                                             onChange={(e) => {
                                                 setUserInfo({
-                                                    ...userInfo,
+                                                    ...userData,
                                                     first_name: e.target.value.trim(),
                                                 });
                                             }}
-                                            disabled={userRole !== "Admin" && true}
+                                            disabled={userRole !== "ADMIN" && true}
                                         />
                                     </Form.Item>
                                     <Form.Item
                                         label="Last Name"
                                         //hasFeedback
                                         validateStatus={
-                                            userInfo.last_name !== ""
+                                            userData.last_name !== ""
                                                 ? "success"
                                                 : "error"
                                         }
@@ -461,14 +489,14 @@ const EditUser = () => {
                                         <Input
                                             placeholder="Last Name"
                                             id="error"
-                                            value={userInfo.last_name}
+                                            value={userData.last_name}
                                             onChange={(e) => {
                                                 setUserInfo({
-                                                    ...userInfo,
+                                                    ...userData,
                                                     last_name: e.target.value.trim(),
                                                 });
                                             }}
-                                            disabled={userRole !== "Admin" && true}
+                                            disabled={userRole !== "ADMIN" && true}
                                         />
                                     </Form.Item>
                                 </Form.Item>
@@ -491,7 +519,7 @@ const EditUser = () => {
                                         // }
                                         validateStatus={
                                             isvalidPhoneNumber(
-                                                userInfo.phone_number
+                                                userData.contact_no
                                             )
                                                 ? "success"
                                                 : "error"
@@ -506,11 +534,11 @@ const EditUser = () => {
                                         <Input
                                             type="tel"
                                             placeholder="Contact Number"
-                                            value={userInfo.phone_number}
+                                            value={userData.contact_no}
                                             onChange={(e) => {
                                                 setUserInfo({
-                                                    ...userInfo,
-                                                    phone_number: e.target.value,
+                                                    ...userData,
+                                                    contact_no: e.target.value,
                                                 });
                                                 // setInputValidations({
                                                 //     ...inputValidations,
@@ -525,7 +553,7 @@ const EditUser = () => {
                                                     event.preventDefault();
                                                 }
                                             }}
-                                            disabled={userRole !== "Admin" && true}
+                                            // disabled={userRole !== "Admin" && true}
                                         />
                                     </Form.Item>
                                     <Form.Item
@@ -539,7 +567,7 @@ const EditUser = () => {
                                         //     isvalidEmail(userInfo?.email) || userInfo?.email === ""? inputValidations.email === false && userInfo?.email !== ""? "Email is already used" : "": "Enter a valid e-mail address"
                                         // }
                                         validateStatus={
-                                            isvalidEmail(userInfo.email)
+                                            isvalidEmail(userData.email)
                                                 ? "success"
                                                 : "error"
                                         }
@@ -553,10 +581,10 @@ const EditUser = () => {
                                         <Input
                                             type="email"
                                             placeholder="E-mail"
-                                            value={userInfo.email}
+                                            value={userData.email}
                                             onChange={(e) => {
                                                 setUserInfo({
-                                                    ...userInfo,
+                                                    ...userData,
                                                     email: e.target.value.trim(),
                                                 });
                                                 // setInputValidations({
@@ -564,7 +592,7 @@ const EditUser = () => {
                                                 //     email: await isUserEmailAvailable(e.target.value.trim(), token, userInfo?.user_name)
                                                 // })
                                             }}
-                                            disabled={userRole !== "Admin" && true}
+                                            disabled={userRole !== "ADMIN" && true}
                                         />
                                     </Form.Item>
                                 </Form.Item>
@@ -575,7 +603,7 @@ const EditUser = () => {
                                     //wrapperCol={{ xs: 24, sm: { span: 12 } }}
                                     wrapperCol={{ xs: 24, sm: { span: 24 } }}
                                 >
-                                    <Form.Item
+                                    {/* <Form.Item
                                         label="Registration"
                                         style={{
                                             display: "inline-block",
@@ -595,7 +623,7 @@ const EditUser = () => {
                                             disabled={true}
                                             allowClear={false}
                                         />
-                                    </Form.Item>
+                                    </Form.Item> */}
                                     {/* <Form.Item
                                         label="Role"
                                         style={{
