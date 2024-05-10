@@ -96,9 +96,10 @@ export const NavProfile = ({ mode }) => {
     const { userRole, userFirstName, userLastName, userImage, token } = useSelector(
         (state) => state.auth
     );
+    console.log(userLastName)
     const { currentTheme } = useSelector(state => state.theme);
     const [cookies, setCookie, removeCookie] = useCookies(['isDefaultPassword', 'token', 'userId', 'userRole', 'userFirstName', 'userLastName']);
-
+    console.log(cookies)
     const extractInitialLetters = () => {
         let output = '';
         if(userFirstName !== undefined || userFirstName !== null || userFirstName !== '')
