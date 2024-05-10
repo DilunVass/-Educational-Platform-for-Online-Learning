@@ -64,13 +64,12 @@ const NewCourse = () => {
                 imgFilePreview: null,
                 videoUrl: ""
             },
-
-            {
-                title: "",
-                imgFile: null,
-                imgFilePreview: null,
-                videoUrl: ""
-            }
+            // {
+            //     title: "",
+            //     imgFile: null,
+            //     imgFilePreview: null,
+            //     videoUrl: ""
+            // }
         ]
     )
 
@@ -362,21 +361,49 @@ const NewCourse = () => {
                                                     />
                                                 </Form.Item>
                                             </Form.Item>
-                                            <Button className="mr-2" icon={<DeleteOutlined />} />
-                                            <Button icon={<PlusCircleOutlined />}/>
                                         </>
                                     )
                                 })
                             }
-                            <Button onClick={() => {handleAddScetions()}}>Add Sections</Button>
+                            {
+                                content.length > 1 &&
+                                <Button 
+                                    className="mr-2" 
+                                    icon={<DeleteOutlined />}
+                                    onClick={() => {
+                                        const arr = [...content];
+                                        arr.pop();
+                                        setContent(arr);
+                                    }} 
+                                />
+                            }
+                            <Button 
+                                className="mr-2" 
+                                icon={<PlusCircleOutlined />}
+                                onClick={() => {
+                                    setContent([
+                                        ...content,
+                                        {
+                                            title: "",
+                                            imgFile: null,
+                                            imgFilePreview: null,
+                                            videoUrl: ""
+                                        } 
+                                    ])
+                                }}
+                            />
+                            <Button 
+                                type="primary" 
+                                onClick={() => {handleAddScetions()}}>Add Sections
+                            </Button>
                         </Form>
                     </Card>
                 </>
             )
         },
         {
-            title: "Certificate",
-            content: "Last-content",
+            title: "Done",
+            content: "Course Added Successfully !",
         },
     ]
 
