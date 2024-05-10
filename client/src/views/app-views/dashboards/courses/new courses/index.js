@@ -24,6 +24,7 @@ import { Button, Card, Input, message, Steps, theme, Form, Select, notification,
 import { displayName } from "react-quill";
 import { BLUE_BASE, GOLD_BASE_OUR_GYM } from "constants/ThemeConstant";
 import { PlusCircleOutlined, DeleteOutlined } from '@ant-design/icons'
+import { set } from "lodash";
 
 const {Option} = Select;
 
@@ -96,6 +97,16 @@ const NewCourse = () => {
             .then(res => {
                 console.log(res.status);
                 if(res.status === 200){
+                    
+                    setCourseInfo({
+                        courseName: "",
+                        category: null,
+                        courseduration: "",
+                        description: "",
+                        price: "",
+                        instructor: ""
+                });
+
                     openNotificationWithIcon(
                         "success",
                         "Successfully Created",
