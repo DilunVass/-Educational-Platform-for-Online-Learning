@@ -269,6 +269,8 @@ const NewCourse = () => {
                                 content.map((item, index) => {
                                     // console.log("item +++++++++++++++++++++");
                                     // console.log(item);
+                                    console.log("index ++++++++++++++++++++");
+                                    console.log(index);
                                     return(
                                         <>
                                             <Divider style={{borderColor: "grey", fontSize: 11}} orientation="left" orientationMargin={0}>{`Section ( ${index+1} )`}</Divider>
