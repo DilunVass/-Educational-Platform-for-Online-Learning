@@ -20,8 +20,12 @@ import customParseFormat from "dayjs/plugin/customParseFormat";
 //     Divider,
 //     Tooltip,
 // } from "antd";
-import { Button, Card, Input, message, Steps, theme, Form } from "antd";
+import { Button, Card, Input, message, Steps, theme, Form, Select, notification, Divider } from "antd";
 import { displayName } from "react-quill";
+import { BLUE_BASE, GOLD_BASE_OUR_GYM } from "constants/ThemeConstant";
+import { PlusCircleOutlined, DeleteOutlined } from '@ant-design/icons'
+
+const {Option} = Select;
 
 // const steps = [
 //     {},
@@ -34,6 +38,41 @@ const NewCourse = () => {
     const { currentTheme } = useSelector(state => state.theme); 
     const { token } = theme.useToken();
     const [current, setCurrent] = useState(0);
+    //const [optionsCustom, setOptionsCustom] = useState([]);
+
+    const optionsCustom = [
+        "IT", "Engineering", "Accounting", "Programming"
+    ]
+
+    //const [imgFile, setImgFile] = useState(null);
+    //const [imgFilePreview, setImgFilePreview] = useState(null);
+
+    const [courseInfo, setCourseInfo] = useState({
+        courseName: "",
+        category: null,
+        duration: "",
+        description: "",
+        price: "",
+        instructor: ""
+    })
+
+    const [content, setContent] = useState(
+        [
+            {
+                title: "",
+                imgFile: null,
+                imgFilePreview: null,
+                videoUrl: ""
+            },
+
+            {
+                title: "",
+                imgFile: null,
+                imgFilePreview: null,
+                videoUrl: ""
+            }
+        ]
+    )
 
     const next = () => {
         setCurrent(current + 1);
@@ -43,21 +82,76 @@ const NewCourse = () => {
         setCurrent(current - 1);
     };
 
-    const [courseInfo, setCourseInfo] = useState({
-        courseName: "",
-        category: "",
-        duration: "",
-        description: "",
-        price: "",
-        instructor: ""
-    })
+    const openNotificationWithIcon = (type, title, desc) => {
+        notification[type]({
+            message: title,
+            description: desc,
+        });
+    };
+
+    const handleAddCourse = () => {
+        try {
+            console.log(courseInfo);
+            axios.post(`http://localhost:8085/api/courses`, courseInfo)
+            .then(res => {
+                // console.log(res);
+                if(res.status === "success"){
+                    openNotificationWithIcon(
+                        "success",
+                        "Successfully Created",
+                        "Successfully Creted the course."
+                    );
+                }
+                else{
+                    openNotificationWithIcon(
+                        "success",
+                        "Error Occured",
+                        "Unable to crete th course."
+                    );
+                }
+            })
+            .catch(err => {
+                console.log(err.message);
+                console.log(err);
+                openNotificationWithIcon(
+                    "success",
+                    "Error Occured",
+                    "Unable to crete th course."
+                );
+            })
+        } catch (error) {
+            console.log(error);
+            openNotificationWithIcon(
+                "success",
+                "Error Occured",
+                "Unable to crete th course."
+            );
+        }
+    }
+
+    const handleAddScetions = () => {
+        console.log(content);
+    }
+
+    // useEffect(() => {
+    //     axios.get(`http://localhost:8083/api/courses/categories`)
+    //     .then(res => {
+    //         //console.log(res);
+    //         setOptionsCustom(res.data);
+    //     })
+    //     .catch(err => {
+    //         console.log(err);
+    //         setOptionsCustom([]);
+    //     })
+    // }, [])
 
     const items = [
         {
             title: "Course Information",
             content: (
                 <>
-                    <Card className={currentTheme === "light" && "ant-card-custom"} style={{width: 350}}>
+                    <Card className={currentTheme === "light" && "ant-card-custom"} style={{width: 450}}>
+                        <span style={{fontSize: 16, fontWeight: 500}}>Fill The Course Information</span><br/><br/>
                         <Form layout="vertical">
                             
                             <Form.Item
@@ -67,18 +161,37 @@ const NewCourse = () => {
                                 <Form.Item
                                     label="Course Name"
                                 >
-                                    <Input value={courseInfo.courseName} onChange={(e) => {setCourseInfo({...courseInfo, courseName: e.target.value})}}/>
+                                    <Input placeholder="Course Name" value={courseInfo.courseName} onChange={(e) => {setCourseInfo({...courseInfo, courseName: e.target.value})}}/>
                                 </Form.Item>
                             </Form.Item>
 
-                            <Form.Item
+                            {/* <Form.Item
                                 wrapperCol={{ xs: 24, sm: { span: 24 } }}
                                 style={{ marginBottom: "-10px" }}
                             >
                                 <Form.Item
                                     label="Course Category"
                                 >
-                                    <Input value={courseInfo.courseName} onChange={(e) => {setCourseInfo({...courseInfo, courseName: e.target.value})}}/>
+                                    <Input value={courseInfo.category} onChange={(e) => {setCourseInfo({...courseInfo, courseName: e.target.value})}}/>
+                                </Form.Item>
+                            </Form.Item> */}
+
+                            <Form.Item
+                                wrapperCol={{ xs: 24, sm: { span: 24 } }}
+                                style={{ marginBottom: "-10px" }}
+                            >
+                                <Form.Item
+                                    label="Category"
+                                >
+                                    <Select placeholder="Select the category" value={courseInfo.category} onChange={(val) => {setCourseInfo({...courseInfo, category: val})}}>
+                                        {
+                                            optionsCustom.map((item, index) => {
+                                                return(
+                                                    <Option key={index} value={item}>{item}</Option>
+                                                );
+                                            })
+                                        }
+                                    </Select>
                                 </Form.Item>
                             </Form.Item>
                             
@@ -89,7 +202,7 @@ const NewCourse = () => {
                                 <Form.Item
                                     label="Duration"
                                 >
-                                    <Input value={courseInfo.duration} onChange={(e) => {setCourseInfo({...courseInfo, duration: e.target.value})}}/>
+                                    <Input placeholder="Course Duration" value={courseInfo.duration} onChange={(e) => {setCourseInfo({...courseInfo, duration: e.target.value})}}/>
                                 </Form.Item>
                             </Form.Item>
                             
@@ -100,7 +213,7 @@ const NewCourse = () => {
                                 <Form.Item
                                     label="Price"
                                 >
-                                    <Input value={courseInfo.price} onChange={(e) => {setCourseInfo({...courseInfo, price: e.target.value})}}/>
+                                    <Input placeholder="Amount" value={courseInfo.price} onChange={(e) => {setCourseInfo({...courseInfo, price: e.target.value})}}/>
                                 </Form.Item>
                             </Form.Item>
                             
@@ -111,7 +224,7 @@ const NewCourse = () => {
                                 <Form.Item
                                     label="Description"
                                 >
-                                    <Input value={courseInfo.description} onChange={(e) => {setCourseInfo({...courseInfo, description: e.target.value})}}/>
+                                    <Input placeholder="Description" value={courseInfo.description} onChange={(e) => {setCourseInfo({...courseInfo, description: e.target.value})}}/>
                                 </Form.Item>
                             </Form.Item>
                             
@@ -122,8 +235,12 @@ const NewCourse = () => {
                                 <Form.Item
                                     label="Instructor"
                                 >
-                                    <Input value={courseInfo.instructor} onChange={(e) => {setCourseInfo({...courseInfo, instructor: e.target.value})}}/>
+                                    <Input placeholder="Instructor Name" value={courseInfo.instructor} onChange={(e) => {setCourseInfo({...courseInfo, instructor: e.target.value})}}/>
                                 </Form.Item>
+                            </Form.Item>
+
+                            <Form.Item style={{display :"flex", justifyContent: "start"}}>
+                                <Button type="primary" onClick={() => {handleAddCourse()}}>Add Course</Button>
                             </Form.Item>
                         </Form>
                     </Card>
@@ -132,7 +249,130 @@ const NewCourse = () => {
         },
         {
             title: "Content Management",
-            content: "Second-content",
+            content: (
+                <>
+                    <Card className={currentTheme === "light" && "ant-card-custom"} style={{width: 450}}>
+                        <span style={{fontSize: 16, fontWeight: 500}}>Fill The Content Information</span><br/><br/>
+                        <Form layout="vertical">
+                            
+                            {
+                                content.map((item, index) => {
+                                    // console.log("item +++++++++++++++++++++");
+                                    // console.log(item);
+                                    return(
+                                        <>
+                                            <Divider style={{borderColor: "grey", fontSize: 11}} orientation="left" orientationMargin={0}>{`Section ( ${index+1} )`}</Divider>
+                                            <Form.Item
+                                                wrapperCol={{ xs: 24, sm: { span: 24 } }}
+                                                style={{ marginBottom: "-10px" }}
+                                            >
+                                                <Form.Item
+                                                    label="Title"
+                                                >
+                                                    <Input 
+                                                        placeholder="Title" 
+                                                        value={item.title} 
+                                                        onChange={(e) => {
+                                                            const newState = content.map((itemInner, indexInner) => {
+                                                                if(indexInner === index){
+                                                                    itemInner["title"] = e.target.value
+                                                                    return itemInner
+                                                                }else{
+                                                                    return itemInner
+                                                                }
+                                                            })
+                                                            // console.log("new state +++++++++++++++++++++++++++");
+                                                            // console.log(newState);
+                                                            setContent(newState)
+                                                        }}
+                                                    />
+                                                </Form.Item>
+                                            </Form.Item>
+
+                                            <Form.Item wrapperCol={{ xs: 24, sm: { span: 24 } }}  style={{ marginBottom: "-10px" }}>
+                                                <Form.Item
+                                                    label=" "
+                                                    style={{
+                                                        display: "inline-block",
+                                                        width: "calc(48%)",
+                                                        marginRight: "calc(4%)",
+                                                    }}
+                                                >
+                                                    {/* <Input value={courseInfo.courseName} onChange={(e) => {setCourseInfo({...courseInfo, courseName: e.target.value})}}/> */}
+                                                    <label htmlFor="img-upload" key={index}>
+                                                        <p style={{backgroundColor: currentTheme === "dark" ? GOLD_BASE_OUR_GYM : BLUE_BASE, color: "white", cursor: "pointer", padding: "8px 16px", borderRadius: "10px"}}>Upload Image</p>
+                                                        <Input
+                                                            id="img-upload"
+                                                            type="file"
+                                                            accept="image/png, image/jpg, image/jpeg"
+                                                            onChange={(e) => {
+                                                                const img = e.target.files[0];
+                                                                if (img) {
+                                                                    const reader = new FileReader();
+                                                                    reader.onloadend = () => {
+                                                                        //setImgFilePreview(reader.result);
+                                                                        console.log(content);
+                                                                        const newState = content.map((itemInner, indexInner) => {
+                                                                            if(indexInner === index){
+                                                                                console.log(index);
+                                                                                console.log(indexInner);
+                                                                                itemInner["imgFilePreview"] = reader.result
+                                                                                return itemInner
+                                                                            }else{
+                                                                                return itemInner
+                                                                            }
+                                                                        })
+                                                                        // console.log("new state +++++++++++++++++++++++++++");
+                                                                        // console.log(newState);
+                                                                        setContent(newState)
+                                                                    };
+                                                                    reader.readAsDataURL(img);
+                                                                }
+                                                                //setImgFile(img);
+                                                                // setWebCamImage(null);
+                                                            }}
+                                                            style={{ display: "none" }}
+                                                        ></Input>
+                                                    </label>
+                                                </Form.Item>
+                                                <Form.Item
+                                                    label="Video URL"
+                                                    style={{
+                                                        display: "inline-block",
+                                                        width: "calc(48%)",
+                                                        //marginRight: "calc(4%)",
+                                                    }}
+                                                >
+                                                    <Input 
+                                                        placeholder="Video URL" 
+                                                        value={item.videoUrl} 
+                                                        onChange={(e) => {
+                                                            const newState = content.map((itemInner, indexInner) => {
+                                                                if(indexInner === index){
+                                                                    itemInner["videoUrl"] = e.target.value
+                                                                    return itemInner
+                                                                }else{
+                                                                    return itemInner
+                                                                }
+                                                            })
+                                                            // console.log("new state +++++++++++++++++++++++++++");
+                                                            // console.log(newState);
+                                                            setContent(newState)
+                                                        }}
+                                                    />
+                                                </Form.Item>
+                                            </Form.Item>
+                                            <Button className="mr-2" icon={<DeleteOutlined />} />
+                                            <Button icon={<PlusCircleOutlined />}/>
+                                        </>
+                                    )
+                                })
+                            }
+                            <Button onClick={() => {handleAddScetions()}}>Add Sections</Button>
+                        </Form>
+                    </Card>
+                </>
+            )
         },
         {
             title: "Certificate",
@@ -145,7 +385,7 @@ const NewCourse = () => {
         justifyContent: "center",
         alignItems: "center",
         lineHeight: "260px",
-        textAlign: "center",
+        // textAlign: "center",
         color: token.colorTextTertiary,
         backgroundColor: token.colorFillAlter,
         borderRadius: token.borderRadiusLG,
