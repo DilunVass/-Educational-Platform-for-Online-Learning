@@ -39,6 +39,7 @@ public class AuthService {
         user.setEmail(request.getEmail());
         user.setPassword(new BCryptPasswordEncoder().encode(request.getPassword()));
         user.setContact_no(request.getContact_no());
+        user.setBase64ProfileImg(request.getBase64ProfileImg());
 //        user.setUserRole(request.getUserRole());
         user.setUserRole(UserRole.ADMIN);
 

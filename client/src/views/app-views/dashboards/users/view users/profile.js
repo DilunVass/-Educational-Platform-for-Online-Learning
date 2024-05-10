@@ -127,32 +127,23 @@ const EditUser = () => {
             setLoading(true);
             axios
                 .post(
-                    `${API_BASE_URL}/api/Auth/UpdateUser`,
+                    `${API_BASE_URL}/api/user/${userId}`,
                     {
-                        id: userInfo.id,
                         user_name: userInfo.user_name,
                         first_name: userInfo.first_name.trim(),
                         last_name: userInfo.last_name.trim(),
-                        reg_date: userInfo.reg_date,
-                        reg_by: userInfo.reg_by,
                         role: userRole,
                         password: userInfo.password,
                         email: userInfo.email.trim(),
-                        phone_number: userInfo.phone_number,
-                        accesstoken: userInfo.accesstoken,
-                        status: "Active",
-                        isDefaultPassword: true,
-                        profilePicture: userInfo.profilePicture,
-                        isDarkMode: userInfo.isDarkMode,
-                        accesstoken: "",
+                        contact_no: userInfo.phone_number,
+                        
                         password: "",
                     },
                     {
                         headers: {
-                            AccessToken: token,
-                            "Content-Type": "application/json",
-                            Accept: "text/plain",
-                        },
+                            "Authorization": `Bearer ${token}`,
+                            'Content-Type': 'application/json'
+                        }
                     }
                 )
                 .then((response) => {
@@ -789,30 +780,30 @@ const EditUser = () => {
                                             //htmlType="submit"
                                             loading={loading}
                                             style={{ width: "100%" }}
-                                            disabled={
-                                                userInfo.user_name === "" ||
-                                                userInfo.first_name === "" ||
-                                                userInfo.last_name === "" ||
-                                                userInfo.reg_date === "" ||
-                                                userInfo.role === "" ||
-                                                userInfo.phone_number === "" ||
-                                                inputValidations.phone_number === false ||
-                                                userInfo.email === "" ||
-                                                newPassword === "" ||
-                                                isValidPassword(newPassword) === false ||
-                                                isValidPassword(newPasswordConfirmation) === false ||
-                                                newPasswordConfirmation ===
-                                                    "" ||
-                                                newPassword !==
-                                                    newPasswordConfirmation ||
-                                                !isvalidPhoneNumber(
-                                                    userInfo.phone_number
-                                                ) ||
-                                                inputValidations.email === false ||
-                                                !isvalidEmail(userInfo.email)
-                                                    ? true
-                                                    : false
-                                            }
+                                            // disabled={
+                                            //     userInfo.user_name === "" ||
+                                            //     userInfo.first_name === "" ||
+                                            //     userInfo.last_name === "" ||
+                                            //     userInfo.reg_date === "" ||
+                                            //     userInfo.role === "" ||
+                                            //     userInfo.phone_number === "" ||
+                                            //     inputValidations.phone_number === false ||
+                                            //     userInfo.email === "" ||
+                                            //     newPassword === "" ||
+                                            //     isValidPassword(newPassword) === false ||
+                                            //     isValidPassword(newPasswordConfirmation) === false ||
+                                            //     newPasswordConfirmation ===
+                                            //         "" ||
+                                            //     newPassword !==
+                                            //         newPasswordConfirmation ||
+                                            //     !isvalidPhoneNumber(
+                                            //         userInfo.phone_number
+                                            //     ) ||
+                                            //     inputValidations.email === false ||
+                                            //     !isvalidEmail(userInfo.email)
+                                            //         ? true
+                                            //         : false
+                                            // }
                                             onClick={() => {
                                                 handleSiubmit();
                                             }}
