@@ -55,7 +55,7 @@ const LandingPage = () => {
                 <div>
                     <div style={{backgroundImage: "url(/img/others/img-18.jpg)"}} className="landing-page-carousel-slides">
                         <Row style={{width: "100%", height: "100%"}}>
-                            <Col xs={12} style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+                            <Col xs={24} sm={12} style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
                                 <div className="landing-page-carousel-text-wrapper light-text">
                                     <span style={{fontSize: "200%", fontWeight: 900}}>Online Education</span><br/>
                                     <span>Is like a rising tide,</span><br/>
@@ -63,7 +63,7 @@ const LandingPage = () => {
                                     <Button type="primary" icon={<LoginOutlined />}><a href={`${APP_PREFIX_PATH}/dashboards/home`}> Explore</a></Button>
                                 </div>
                             </Col>
-                            <Col xs={12}>
+                            <Col xs={24} sm={12}>
                             </Col>
                         </Row>
                     </div>
@@ -71,9 +71,9 @@ const LandingPage = () => {
                 <div>
                     <div style={{backgroundImage: "url(/img/others/img-19.jpg)"}} className="landing-page-carousel-slides">
                         <Row style={{width: "100%", height: "100%"}}>
-                            <Col xs={12}>
+                            <Col xs={24} sm={12}>
                             </Col>
-                            <Col xs={12} style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+                            <Col xs={24} sm={12} style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
                                 <div className="landing-page-carousel-text-wrapper light-text">
                                     <span style={{fontSize: "200%", fontWeight: 900}}>Learn Yourself</span><br/>
                                     <span>Be your own guider,</span><br/>
@@ -87,9 +87,9 @@ const LandingPage = () => {
                 <div>
                     <div style={{backgroundImage: "url(/img/others/img-20.jpg)"}} className="landing-page-carousel-slides">
                         <Row style={{width: "100%", height: "100%"}}>
-                                <Col xs={12}>
+                                <Col xs={24} sm={12}>
                                 </Col>
-                                <Col xs={12} style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+                                <Col xs={24} sm={12} style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
                                     <div className="landing-page-carousel-text-wrapper light-text">
                                         <span style={{fontSize: "200%", fontWeight: 900}}>It's a Fact That</span><br/>
                                         <span>Online learning is the future and will undoubtedly replace</span><br/>

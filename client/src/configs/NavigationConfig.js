@@ -26,17 +26,17 @@ const sectionNav = [{
   isGroupTitle: true,
   submenu: [
     {
-      key: 'dashboards/AA',
-      path: `${APP_PREFIX_PATH}/dashboards/home`,
-      title: 'A',
+      key: 'dashboards/course',
+      path: `${APP_PREFIX_PATH}/dashboards/course/new`,
+      title: 'Course',
       icon: UsergroupDeleteOutlined,
       breadcrumb: false,
       isGroupTitle: false,
       submenu: [
         {
-          key: 'view',
-          path: `${APP_PREFIX_PATH}/dashboards/home`,
-          title: 'B',
+          key: 'dashboards/course/newcourse',
+          path: `${APP_PREFIX_PATH}/dashboards/course/new`,
+          title: 'New Course',
           icon: UsergroupAddOutlined,
           breadcrumb: false,
           submenu: []
