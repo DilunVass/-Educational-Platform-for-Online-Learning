@@ -30,6 +30,7 @@ export const LoginForm = (props) => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const [userdata, setUserdata] = useState();
     const [cookies, setCookie, removeCookie] = useCookies([
         "isDefaultPassword",
         "token",
@@ -79,7 +80,7 @@ export const LoginForm = (props) => {
                 // }
             );
             // console.log(response.data.data.token);
-            // console.log(response.data.userData._id);
+        
 
             if (response.data.status === "Fail") {
                 setShowMessage("Invalid User name or Password !");
@@ -89,7 +90,8 @@ export const LoginForm = (props) => {
                 }, 1500);
             } else if (response.data.statusCode === 201) {
 
-                console.log(response.data);
+                setUserdata(response);
+                // console.log(response.data);
                 setCookie(
                     "isDefaultPassword",
                     response.data.isDefaultPassword === true? 'true' : 'false',
@@ -131,17 +133,19 @@ export const LoginForm = (props) => {
                         response.data.isDefaultPassword === true? 'true' : 'false'
                     )
                 );
+
                 
                 dispatch(setUserImage("34343"));
                 dispatch(onSwitchTheme('dark'));
-				// dispatch(setUserImage(response.data.userData.base64ProfileImg));
-				// dispatch(onSwitchTheme(response.data.isDarkMode === true? 'dark' : 'light'));
+				dispatch(setUserImage(response.data.userData.base64ProfileImg));
+				dispatch(onSwitchTheme(response.data.isDarkMode === true? 'dark' : 'light'));
                 dispatch(setUserId(response.data.userData._id));
                 dispatch(setUserFirstName(response.data.userData.first_name));
                 dispatch(setUserLastName(response.data.userData.last_name));
-                //dispatch(setUserRole("Admin"));
+                dispatch(setUserRole("Admin"));
                 dispatch(setUserRole(response.data.userData.userRole));
-
+                
+                
                 navigate("/");
             } else {
                 setShowMessage("Error Occured !");
@@ -157,11 +161,11 @@ export const LoginForm = (props) => {
                 'false',
                 { path: "/", expires: new Date(Date.now() + 3600e3) }
             );
-            setCookie("token", "43thbftu5iu4t5", {
+            setCookie("token", userdata.data.token, {
                 path: "/",
                 expires: new Date(Date.now() + 3600e3),
             });
-            setCookie("userId", 12, {
+            setCookie("userId", userdata.data.userData._id, {
                 path: "/",
                 expires: new Date(Date.now() + 3600e3),
             });
@@ -173,10 +177,10 @@ export const LoginForm = (props) => {
                 path: "/",
                 expires: new Date(Date.now() + 3600e3),
             });
-            // setCookie("userLastName", "Marasinghe", {
-            //     path: "/",
-            //     expires: new Date(Date.now() + 3600e3),
-            // });
+            setCookie("userLastName", "Marasinghe", {
+                path: "/",
+                expires: new Date(Date.now() + 3600e3),
+            });
             setCookie("userImage", "ererer", {
                 path: "/",
                 expires: new Date(Date.now() + 3600e3),
@@ -196,9 +200,9 @@ export const LoginForm = (props) => {
             
             dispatch(setUserImage("34343"));
             dispatch(onSwitchTheme('dark'));
-            dispatch(setUserId(12));
-            // dispatch(setUserFirstName("Chamalka"));
-            // dispatch(setUserLastName("Marasinghe"));
+            dispatch(setUserId("12"));
+            dispatch(setUserFirstName("Chamalka"));
+            dispatch(setUserLastName("Marasinghe"));
             dispatch(setUserRole("Admin"));
             navigate("/");
 

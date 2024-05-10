@@ -38,7 +38,7 @@ const ImageTile = ({ item }) => {
                     currentTheme === "dark" && "img-tile-wrapper-dark"
                 }`}
             >
-                <div className="img-text-info">
+                {/* <div className="img-text-info">
                     <p
                         className={`img-text-name ${
                             currentTheme === "dark" && "img-text-name-dark"
@@ -46,7 +46,7 @@ const ImageTile = ({ item }) => {
                     >
                         9090
                     </p>
-                </div>
+                </div> */}
                 {isImageAvailable && (
                     <Image
                         src={`${GOOGLE_BUCKET_URL}/${item?.image}`}
@@ -71,11 +71,25 @@ const ImageTile = ({ item }) => {
                             currentTheme === "dark" && "img-text-name-dark"
                         }`}
                     >
-                        John Smith
+                        JAvaScript Advanced Topics and Tutorial
                     </p>
-                    <p className="img-text-date">
+                    <p
+                        className={`img-text-name2 ${
+                            currentTheme === "dark" && "img-text-name-dark2"
+                        }`}
+                    >
+                        Marsh Rooney 
+                    </p>
+                    <p
+                        className={`img-text-name3 ${
+                            currentTheme === "dark" && "img-text-name-dark3"
+                        }`}
+                    >
+                        $13.68
+                    </p>
+                    {/* <p className="img-text-date">
                         Expired at: 2024-9-10
-                    </p>
+                    </p> */}
                 </div>
             </div>
         </>
