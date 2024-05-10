@@ -47,7 +47,7 @@ public class CourseService {
         course.setCategory(courseDto.getCategory());
         course.setCourseDuration(courseDto.getCourseDuration());
         course.setDescription(courseDto.getDescription());
-        course.setContentId(courseDto.getContentId());
+//        course.setContentId(courseDto.getContentId());
         course.setCertificateId(courseDto.getCertificateId());
         course.setInstructor(courseDto.getInstructor());
         course.setPrice(courseDto.getPrice());
