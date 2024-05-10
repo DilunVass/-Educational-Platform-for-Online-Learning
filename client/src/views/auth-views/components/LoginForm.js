@@ -30,7 +30,7 @@ export const LoginForm = (props) => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const [user, setUser] = useState();
+    const [userdata, setUserdata] = useState();
     const [cookies, setCookie, removeCookie] = useCookies([
         "isDefaultPassword",
         "token",
@@ -90,7 +90,7 @@ export const LoginForm = (props) => {
                 }, 1500);
             } else if (response.data.statusCode === 201) {
 
-                setUser(response);
+                setUserdata(response);
                 // console.log(response.data);
                 setCookie(
                     "isDefaultPassword",
@@ -145,6 +145,7 @@ export const LoginForm = (props) => {
                 dispatch(setUserRole("Admin"));
                 dispatch(setUserRole(response.data.userData.userRole));
                 
+                
                 navigate("/");
             } else {
                 setShowMessage("Error Occured !");
@@ -160,11 +161,11 @@ export const LoginForm = (props) => {
                 'false',
                 { path: "/", expires: new Date(Date.now() + 3600e3) }
             );
-            setCookie("token", user.data.token, {
+            setCookie("token", userdata.data.token, {
                 path: "/",
                 expires: new Date(Date.now() + 3600e3),
             });
-            setCookie("userId", user.data.userData._id, {
+            setCookie("userId", userdata.data.userData._id, {
                 path: "/",
                 expires: new Date(Date.now() + 3600e3),
             });
