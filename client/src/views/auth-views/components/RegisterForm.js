@@ -36,12 +36,9 @@ const RegisterForm = ({ onClose, open }) => {
 
     const handleSubmit = async() => {
         try {
-            axios.post("http://localhost:8087/api/user/register", 
+            axios.post("http://localhost:8085/api/user/register", 
             
                 userInfo, 
-                {
-                    withCredentials: true
-                }
             )
             .then( 
                 res => res.data)

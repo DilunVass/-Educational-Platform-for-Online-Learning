@@ -2,7 +2,7 @@ import { SIDE_NAV_LIGHT, NAV_TYPE_SIDE, DIR_LTR, SIDE_NAV_DARK } from 'constants
 
 export const APP_NAME = 'Nasa Info';
 export const API_BASE_URL = "https://api.nasa.gov";
-export const API_AUTH_URL = "http://localhost:8087"
+export const API_AUTH_URL = "http://localhost:8085"
 export const NASA_API_KEY = "xiI0NGe0SyLL2z8X1jRfAL4fjQHC3WcsamBvuoAi"
 export const APP_PREFIX_PATH = '/app';
 export const AUTH_PREFIX_PATH = '/auth';
