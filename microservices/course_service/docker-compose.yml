@@ -1,0 +1,7 @@
+version: '3.8'
+
+services:
+  web:
+    image: course_service
+    ports:
+      - "8083:8083"
