@@ -22,7 +22,6 @@ public class Course {
     private Category category;
     private String courseDuration;
     private String description;
-    private List<String> sectionIds;
     private String certificateId;
     private double price;
     private String instructor;
