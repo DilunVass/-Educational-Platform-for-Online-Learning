@@ -18,15 +18,10 @@ public class CourseContent {
 
     @Id
     private String _id;
-
     private String courseId;
-
     private String sectionId;
-
+    private String title;
     private String textContent;
-
-    private List<String> imageUrls;
-
+    private List<String> images;
     private List<String> videoUrls;
-
 }

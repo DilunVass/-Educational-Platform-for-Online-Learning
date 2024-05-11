@@ -14,4 +14,8 @@ public interface CourseContentRepository extends MongoRepository<CourseContent, 
 
     List<CourseContent> findByCourseIdAndSectionId(String courseId, String sectionId);
 
+    List<CourseContent> findAllByCourseId(String courseId);
+
+    void deleteByCourseId(String courseId);
+
 }
