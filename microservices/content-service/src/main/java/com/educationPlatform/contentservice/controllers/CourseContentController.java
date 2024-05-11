@@ -27,6 +27,11 @@ public class CourseContentController {
         return contents;
     }
 
+    @GetMapping("/noOfSections/{courseId}")
+    public double getNoOfSectionsByCourseId(@PathVariable String courseId){
+        return service.getNoOfSectionsByCourseId(courseId);
+    }
+
     @PutMapping("/{courseId}")
     public ResponseEntity<?> updateCourseContent(@PathVariable String courseId, @RequestBody List<CourseContent> updatedContents) {
         List<CourseContent> updatedContentsResponse = service.updateCourseContents(courseId, updatedContents);

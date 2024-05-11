@@ -20,6 +20,7 @@ public class CourseContent {
     private String _id;
     private String courseId;
     private String sectionId;
+    private double noOfSections;
     private String title;
     private String textContent;
     private List<String> images;
