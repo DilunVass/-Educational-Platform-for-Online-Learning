@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Button, Card, Carousel, Col, Form, Input, Modal, Row, Radio } from 'antd';
+import { Button, Card, Carousel, Col, Form, Input, Modal, Row, Radio, DatePicker } from 'antd';
 import { image } from "d3-fetch";
+import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
 import { useNavigate } from "react-router-dom";
 import { APP_PREFIX_PATH } from "configs/AppConfig";
 import {
@@ -14,6 +16,13 @@ import {
 } from '@ant-design/icons';
 import ImageTile from "./ImageTile";
 import { BLUE_BASE, GOLD_BASE_OUR_GYM } from "constants/ThemeConstant";
+
+// const { Option } = Select;
+dayjs.extend(customParseFormat);
+const { RangePicker } = DatePicker;
+const dateFormat = "YYYY-MM-DD";
+const weekFormat = "MM/DD";
+const monthFormat = "YYYY/MM";
 
 const contentStyle = {
     height: '160px',
@@ -43,7 +52,8 @@ const LandingPage = () => {
         holder: "",
         cvc: "",
         amount: "",
-        method: 2
+        method: 1,
+        expireDate: `${dayjs().format("YYYY-MM-DD")}`
     })
 
     const [value, setValue] = useState(1);
@@ -67,7 +77,19 @@ const LandingPage = () => {
 
     const handleCancelPayment = () => {
         setIsPaymentModalOpen(false);
+        setPaymentInfo({
+            cardNumber: "",
+            holder: "",
+            cvc: "",
+            amount: "",
+            method: 1,
+            expireDate: `${dayjs().format("YYYY-MM-DD")}`
+        })
         // setSelectedCourse(null);
+    }
+
+    const onChangeDate = (date, dateString) => {
+        setPaymentInfo({...paymentInfo, expireDate: dateString})
     }
 
     useEffect(() => {
@@ -281,6 +303,29 @@ const LandingPage = () => {
                                 label="Amount"
                             >
                                 <Input placeholder="Course Name" value={paymentInfo.amount} onChange={(e) => {setPaymentInfo({...paymentInfo, amount: e.target.value})}}/>
+                            </Form.Item>
+                        </Form.Item>
+
+                        <Form.Item
+                            wrapperCol={{ xs: 24, sm: { span: 24 } }}
+                            style={{ marginBottom: "-10px" }}
+                        >
+                            <Form.Item
+                                label="Expire Date"
+                                style={{
+                                    display: "inline-block",
+                                    width: "calc(48%)",
+                                    marginRight: "calc(4%)",
+                                }}
+                            >
+                                <DatePicker
+                                    placeholder="Select Date"
+                                    value={dayjs(paymentInfo.expireDate, dateFormat)}
+                                    format={dateFormat}
+                                    onChange={onChangeDate}
+                                    style={{ width: "100%" }}
+                                    allowClear={false}
+                                />
                             </Form.Item>
                         </Form.Item>
                         
