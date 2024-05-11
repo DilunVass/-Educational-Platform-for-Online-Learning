@@ -1,7 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Button, Card, Carousel, Col, Row } from 'antd';
+import { Button, Card, Carousel, Col, Form, Input, Modal, Row, Radio, DatePicker } from 'antd';
 import { image } from "d3-fetch";
+import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
 import { useNavigate } from "react-router-dom";
 import { APP_PREFIX_PATH } from "configs/AppConfig";
 import {
@@ -13,6 +15,14 @@ import {
     LoginOutlined
 } from '@ant-design/icons';
 import ImageTile from "./ImageTile";
+import { BLUE_BASE, GOLD_BASE_OUR_GYM } from "constants/ThemeConstant";
+
+// const { Option } = Select;
+dayjs.extend(customParseFormat);
+const { RangePicker } = DatePicker;
+const dateFormat = "YYYY-MM-DD";
+const weekFormat = "MM/DD";
+const monthFormat = "YYYY/MM";
 
 const contentStyle = {
     height: '160px',
@@ -26,6 +36,61 @@ const LandingPage = () => {
 
     const navigate = useNavigate();
     const { currentTheme } = useSelector(state => state.theme);
+
+    const [selectedCourse, setSelectedCourse] = useState({
+        courseName: "Javascript Advanced Topics",
+        category: "Programming Languages",
+        courseduration: "40",
+        description: "Best online course for learn and master javasvript and js librariesframeworks",
+        price: "20",
+        instructor: "Jade Smith",
+        sections: ["Conditions", "Iterations", "Strings", "Arrays", "Maths", "Async/Await"]
+    });
+
+    const [paymentInfo, setPaymentInfo] = useState({
+        cardNumber: "",
+        holder: "",
+        cvc: "",
+        amount: "",
+        method: 1,
+        expireDate: `${dayjs().format("YYYY-MM-DD")}`
+    })
+
+    const [value, setValue] = useState(1);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
+
+    const showModal = () => {
+        setIsModalOpen(true);
+        // setSelectedCourse(item);
+    };
+
+    const handleCancel = () => {
+        setIsModalOpen(false);
+        // setSelectedCourse(null);
+    }
+
+    const showModalPayment = () => {
+        setIsPaymentModalOpen(true);
+        // setSelectedCourse(item);
+    };
+
+    const handleCancelPayment = () => {
+        setIsPaymentModalOpen(false);
+        setPaymentInfo({
+            cardNumber: "",
+            holder: "",
+            cvc: "",
+            amount: "",
+            method: 1,
+            expireDate: `${dayjs().format("YYYY-MM-DD")}`
+        })
+        // setSelectedCourse(null);
+    }
+
+    const onChangeDate = (date, dateString) => {
+        setPaymentInfo({...paymentInfo, expireDate: dateString})
+    }
 
     useEffect(() => {
         const leftNav = document.getElementsByClassName("ant-layout-sider");
@@ -106,7 +171,9 @@ const LandingPage = () => {
                     {data.map((item, index) => {
                         return (
                             <Col style={{ marginBottom: "15px" }} className="img-tiles-wrapper-column">
-                                <ImageTile item={item}/>
+                                <span style={{cursor: "pointer"}} onClick={() => {showModal()}}>
+                                    <ImageTile item={item} />
+                                </span>
                             </Col>
                         );
                     })}                    
@@ -122,6 +189,152 @@ const LandingPage = () => {
                     />
                 </Spin> */}
             </Card>
+            <Modal title={selectedCourse.courseName} open={isModalOpen} onCancel={handleCancel} 
+                footer={[
+                    <Button type="primary" onClick={() => {showModalPayment()}}>Enroll</Button>
+                ]}
+            >
+                <Row>
+                    <Col xs={24} sm={11} style={{marginBottom: "10px"}}>
+                        <img src="/img/avatars/noprofile.jpg" className="course-info-modal-img"/>
+                    </Col>
+                    <Col xs={24} sm={13}>
+                        <span style={{fontWeight: 500, color: currentTheme === "dark"? GOLD_BASE_OUR_GYM : BLUE_BASE}}>{selectedCourse.category}</span><br/>
+                        <span style={{fontSize: 14}}>{selectedCourse.instructor}</span><br/>
+                        <span style={{fontSize: 12}}>{selectedCourse.courseduration} Hours</span><br/><br/>
+                        <span style={{fontSize: 12}}>{selectedCourse.description}</span><br/>
+                        <ul>
+                            {
+                                selectedCourse.sections.map((it, i) => {
+                                    return(
+                                        <li>{it}</li>
+                                    );
+                                })
+                            }
+                        </ul>
+                        <span style={{fontSize: 12, fontWeight: 700, color: currentTheme === "dark"? GOLD_BASE_OUR_GYM : BLUE_BASE}}>$ {selectedCourse.price}/= </span><br/>
+                    </Col>
+                </Row>
+            </Modal>
+            <Modal title={"Make Payment"} open={isPaymentModalOpen} onCancel={handleCancelPayment} width={600}
+                footer={[
+                    <Button type="primary">Enroll</Button>
+                ]}
+            >
+                {/* <Row>
+                    <Col xs={24} sm={11} style={{marginBottom: "10px"}}>
+                        <img src="/img/avatars/noprofile.jpg" className="course-info-modal-img"/>
+                    </Col>
+                    <Col xs={24} sm={13}>
+                        <span style={{fontWeight: 500, color: currentTheme === "dark"? GOLD_BASE_OUR_GYM : BLUE_BASE}}>{selectedCourse.category}</span><br/>
+                        <span style={{fontSize: 14}}>{selectedCourse.instructor}</span><br/>
+                        <span style={{fontSize: 12}}>{selectedCourse.courseduration} Hours</span><br/><br/>
+                        <span style={{fontSize: 12}}>{selectedCourse.description}</span><br/>
+                        <ul>
+                            {
+                                selectedCourse.sections.map((it, i) => {
+                                    return(
+                                        <li>{it}</li>
+                                    );
+                                })
+                            }
+                        </ul>
+                        <span style={{fontSize: 12, fontWeight: 700, color: currentTheme === "dark"? GOLD_BASE_OUR_GYM : BLUE_BASE}}>$ {selectedCourse.price}/= </span><br/>
+                    </Col>
+                </Row> */}
+
+                <div>
+                    <Form layout="vertical">
+                        <br/>
+                        <span>Select the preferable Payment method</span><br/><br/>
+                        <Radio.Group onChange={(e) => {setPaymentInfo({...paymentInfo, method: e.target.value})}} value={paymentInfo.method}>
+                            <Radio value={1}><img src="/img/others/img-8.png" className="payment-choise-img"/></Radio>
+                            <Radio value={2}><img src="/img/others/img-9.png" className="payment-choise-img"/></Radio>
+                        </Radio.Group>
+                        <br/><br/>
+                        <Form.Item
+                            wrapperCol={{ xs: 24, sm: { span: 24 } }}
+                            style={{ marginBottom: "-10px" }}
+                        >
+                            <Form.Item
+                                style={{
+                                    display: "inline-block",
+                                    width: "calc(48%)",
+                                    marginRight: "calc(4%)",
+                                }}
+                            >
+                                <Form.Item
+                                    label="Card Number"
+                                >
+                                    <Input placeholder="Card Number" value={paymentInfo.cardNumber} onChange={(e) => {setPaymentInfo({...paymentInfo, cardNumber: e.target.value})}} />
+                                </Form.Item>
+                            </Form.Item>
+                            <Form.Item
+                                style={{
+                                    display: "inline-block",
+                                    width: "calc(48%)",
+                                    // marginRight: "calc(4%)",
+                                }}
+                            >
+                                <Form.Item
+                                    label="CVC"
+                                >
+                                    <Input placeholder="CVC" value={paymentInfo.cvc} onChange={(e) => {setPaymentInfo({...paymentInfo, cvc: e.target.value})}}/>
+                                </Form.Item>
+                            </Form.Item>
+                        </Form.Item>
+
+                        <Form.Item
+                            wrapperCol={{ xs: 24, sm: { span: 24 } }}
+                            style={{ marginBottom: "-10px" }}
+                        >
+                            <Form.Item
+                                label="Card Holder Name"
+                            >
+                                <Input placeholder="Holder Name" value={paymentInfo.holder} onChange={(e) => {setPaymentInfo({...paymentInfo, holder: e.target.value})}}/>
+                            </Form.Item>
+                        </Form.Item>
+
+                        <Form.Item
+                            wrapperCol={{ xs: 24, sm: { span: 24 } }}
+                            style={{ marginBottom: "-10px" }}
+                        >
+                            <Form.Item
+                                label="Amount"
+                            >
+                                <Input placeholder="Course Name" value={paymentInfo.amount} onChange={(e) => {setPaymentInfo({...paymentInfo, amount: e.target.value})}}/>
+                            </Form.Item>
+                        </Form.Item>
+
+                        <Form.Item
+                            wrapperCol={{ xs: 24, sm: { span: 24 } }}
+                            style={{ marginBottom: "-10px" }}
+                        >
+                            <Form.Item
+                                label="Expire Date"
+                                style={{
+                                    display: "inline-block",
+                                    width: "calc(48%)",
+                                    marginRight: "calc(4%)",
+                                }}
+                            >
+                                <DatePicker
+                                    placeholder="Select Date"
+                                    value={dayjs(paymentInfo.expireDate, dateFormat)}
+                                    format={dateFormat}
+                                    onChange={onChangeDate}
+                                    style={{ width: "100%" }}
+                                    allowClear={false}
+                                />
+                            </Form.Item>
+                        </Form.Item>
+                        
+                        {/* <Form.Item style={{display :"flex", justifyContent: "start"}}>
+                            <Button type="primary" onClick={() => {}}>Add Course</Button>
+                        </Form.Item> */}
+                    </Form>
+                </div>
+            </Modal>
             <br/>
         </>
     );
