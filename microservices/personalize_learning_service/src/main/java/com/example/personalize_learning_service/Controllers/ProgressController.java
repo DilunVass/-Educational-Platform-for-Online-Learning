@@ -14,8 +14,8 @@ public class ProgressController {
     private ProgressService progressService;
 
     @PostMapping
-    public ApiResponse<Progress> setProgress(String studentId, String courseId){
-        Progress progress = progressService.setProgress(studentId,courseId);
+    public ApiResponse<Progress> setProgress(String studentId, String courseId, double noOfSectionsCovered){
+        Progress progress = progressService.setProgress(studentId,courseId, noOfSectionsCovered);
         return new ApiResponse<>(progress, 201, "Progress set successfully");
     }
 
