@@ -162,11 +162,11 @@ export const LoginForm = (props) => {
             //     'false',
             //     { path: "/", expires: new Date(Date.now() + 3600e3) }
             // );
-            // setCookie("token", userdata.data.token, {
+            // setCookie("token", "ghgh", {
             //     path: "/",
             //     expires: new Date(Date.now() + 3600e3),
             // });
-            // setCookie("userId", userdata.data.userData._id, {
+            // setCookie("userId", "009", {
             //     path: "/",
             //     expires: new Date(Date.now() + 3600e3),
             // });
