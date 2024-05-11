@@ -1,5 +1,6 @@
 package com.example.personalize_learning_service.Services;
 
+import com.example.personalize_learning_service.Dtos.ProgressDto;
 import com.example.personalize_learning_service.Models.Progress;
 import com.example.personalize_learning_service.Repositories.ProgressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,12 +39,16 @@ public class ProgressService {
 //        return progress;
 //    }
 
-    public Progress setProgress(String studentId, String courseId, double noOfSectionsCovered) {
+    public Progress setProgress(ProgressDto progressDto) {
+        String studentId = progressDto.getStudentId();
+        String courseId = progressDto.getCourseId();
+        double noOfSectionsCovered = progressDto.getNoOfSectionsCovered();
+
         // Query progress repository to check if a progress document exists for the given studentId and courseId
         Optional<Progress> optionalProgress = progressRepository.findByStudentIdAndCourseId(studentId, courseId);
         Progress progress;
 
-        String contentServiceUrl = "http://LAPTOP-VI8PV1N1:8089/api/contents/noOfSections";
+        String contentServiceUrl = "http://localhost:8089/api/contents/noOfSections/" + courseId;
         ResponseEntity<Double> responseEntity = restTemplate.getForEntity(contentServiceUrl, Double.class);
         Double noOfSections = responseEntity.getBody();
 
@@ -79,21 +84,27 @@ public class ProgressService {
     }
 
 
-    public double getProgressByStudentAndCourse(String studentId, String courseId) {
-        return progressRepository.getProgressPercentageByStudentIdAndCourseId(studentId,courseId);
+    public double getProgressByStudentAndCourse(ProgressDto progressDto) {
+        Optional<Progress> progressPresent = progressRepository.findProgressPercentageByStudentIdAndCourseId(progressDto.getStudentId(), progressDto.getCourseId());
+        if(progressPresent.isPresent()){
+            Progress progress = progressRepository.getProgressByStudentIdAndCourseId(progressDto.getStudentId(), progressDto.getCourseId());
+            return progress.getProgressPercentage();
+        }else{
+            return 0.0;
+        }
     }
 
-    public Progress updateProgress(String studentId, String courseId) {
-        Progress existingProgress = progressRepository.getProgressByStudentIdAndCourseId(studentId, courseId);
+    public Progress updateProgress(ProgressDto progressDto) {
+        Progress existingProgress = progressRepository.getProgressByStudentIdAndCourseId(progressDto.getStudentId(), progressDto.getCourseId());
 
         double prev = existingProgress.getNoOfSectionsCovered();
         double next = prev + 1;
         existingProgress.setNoOfSectionsCovered(next);
 
-//        existingProgress.setNoOfSectionsCovered(noOfSectionsCovered);
-
         double progressNewPercentage = (next/existingProgress.getNoOfSections()) * 100;
         existingProgress.setProgressPercentage(progressNewPercentage);
+
+        existingProgress.setCompleted(progressNewPercentage == 100);
 
         progressRepository.save(existingProgress);
 

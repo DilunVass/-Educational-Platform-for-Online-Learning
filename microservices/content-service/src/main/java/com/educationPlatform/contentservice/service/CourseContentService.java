@@ -37,6 +37,7 @@ public class CourseContentService {
             for (CourseContent existingContent : existingContents) {
                 if (existingContent.getSectionId().equals(updatedContent.getSectionId())) {
                     existingContent.setTitle(updatedContent.getTitle());
+                    existingContent.setNoOfSections(updatedContent.getNoOfSections());
                     existingContent.setTextContent(updatedContent.getTextContent());
                     existingContent.setImages(updatedContent.getImages());
                     existingContent.setVideoUrls(updatedContent.getVideoUrls());
@@ -57,4 +58,15 @@ public class CourseContentService {
         courseContentRepository.deleteByCourseId(courseId);
         return true;
     }
+
+    public double getNoOfSectionsByCourseId(String courseId) {
+        List<CourseContent> courseContents = courseContentRepository.findAllByCourseId(courseId);
+
+        if (!courseContents.isEmpty()) {
+            return courseContents.get(0).getNoOfSections();
+        } else {
+            return 0.0;
+        }
+    }
+
 }

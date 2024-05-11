@@ -18,4 +18,6 @@ public interface CourseContentRepository extends MongoRepository<CourseContent, 
 
     void deleteByCourseId(String courseId);
 
+    double findNoOfSectionsByCourseId(String courseId);
+
 }
