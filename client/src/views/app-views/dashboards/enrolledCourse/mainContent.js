@@ -23,17 +23,17 @@ function MainContent({ selectedContent }) {
         <Card sx={{ maxWidth: 645, mb: 2 }} className={currentTheme === "dark" ? 'mui-card-content-dark' : 'mui-card-content-light'}>
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
-              {selectedContent}
+              {selectedContent.key}
             </Typography>
-            {selectedContent === "part 1" && (
+            {selectedContent.key === "Part 1" && (
               <Typography variant="body2" color={currentTheme === "dark" ? "white" : "black"}>
-                Elegant description of the content.
+                {selectedContent.content}
               </Typography>
             )}
-            {selectedContent === "part 2" && (
-              <img src="https://source.unsplash.com/random" alt="Random" />
+            {selectedContent.key === "Part 2" && (
+              <img src={selectedContent.content} alt="Random" style={{width: "100%", height: "400px", objectFit: 'cover'}}/>
             )}
-            {selectedContent === "part 3" && (
+            {selectedContent.key === "Part 3" && (
               <div style={{ overflow: 'hidden', paddingTop: '56.25%', position: 'relative' }}>
                 <iframe
                   style={{
@@ -44,7 +44,7 @@ function MainContent({ selectedContent }) {
                     height: '100%',
                     border: 0,
                   }}
-                  src="https://www.youtube.com/embed/0u0UFWrUDss"
+                  src={selectedContent.content}
                   title="Course Video"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen

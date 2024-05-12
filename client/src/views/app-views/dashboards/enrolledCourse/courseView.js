@@ -24,7 +24,7 @@ function CourseView() {
         </Toolbar> */}
       </AppBar>
       <Sidebar onContentChange={handleContentChange} />
-      <MainContent selectedContent={"part 3"} />
+      <MainContent selectedContent={selectedContent} />
     </Box>
 
   );
