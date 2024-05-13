@@ -1,5 +1,6 @@
 package com.educationPlatform.userservice.controller;
 
+import com.educationPlatform.userservice.ServiceImpl.UserServiceImpl;
 import com.educationPlatform.userservice.dto.AuthenticationResponse;
 import com.educationPlatform.userservice.dto.UserDTO;
 import com.educationPlatform.userservice.model.User;
@@ -26,26 +27,34 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    public UserController(UserService service, AuthService authService) {
+    public UserController(UserServiceImpl service, AuthService authService) {
         this.service = service;
         this.authService = authService;
     }
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Object> addUser(@RequestBody UserDTO dto){
-
-        ResponseEntity response = null;
-
-        try{
-            response = service.addUser(dto);
-            System.out.println(response);
-            return new ResponseEntity<>(response, HttpStatus.OK);
-
-        }catch (Exception e){
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-
+//    @PostMapping
+//    @ResponseStatus(HttpStatus.CREATED)
+//    public ResponseEntity<Object> addUser(@RequestBody UserDTO dto){
+//
+//        ResponseEntity response = null;
+//
+//        try{
+//            response = service.addUser(dto);
+//            System.out.println(response);
+//            return new ResponseEntity<>(response, HttpStatus.OK);
+//
+//        }catch (Exception e){
+//            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+//        }
+//
+//    }
+    @PostMapping("/register")
+    public ApiResponse<AuthenticationResponse> register(@RequestBody User request){
+//        UserDTO createdUser = authService.createUser(signupRequest);
+//        if(createdUser == null)
+        AuthenticationResponse response = authService.register(request);
+//            return new ResponseEntity<>("User is not created. Try again later!!", HttpStatus.BAD_REQUEST);
+        return new ApiResponse<>(response, 201, "Course retrieved successfully");
     }
 
     @GetMapping
@@ -71,14 +80,7 @@ public class UserController {
     @Autowired
     private final AuthService authService;
 
-    @PostMapping("/register")
-    public ApiResponse<AuthenticationResponse> register(@RequestBody User request){
-//        UserDTO createdUser = authService.createUser(signupRequest);
-//        if(createdUser == null)
-       AuthenticationResponse response = authService.register(request);
-//            return new ResponseEntity<>("User is not created. Try again later!!", HttpStatus.BAD_REQUEST);
-        return new ApiResponse<>(response, 201, "Course retrieved successfully");
-    }
+
 
     @PostMapping("/login")
     public LoginResponse<AuthenticationResponse, User> login(
@@ -105,7 +107,7 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
-//
+
 //    @DeleteMapping("/{id}")
 //    public ResponseEntity<Object> deleteUser(@PathVariable("id") String userId){
 //        try{

@@ -4,13 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-
     <list default="true" id="b5c34c09-b1df-485e-96c9-f1e40b58e0fc" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../api_gateway/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../api_gateway/docker-compose.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../content-service/src/main/java/com/educationPlatform/contentservice/ServiceImpl/CourseContentServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../payment_service/src/main/java/com/example/payment_service/ServiceImpl/PaymentServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../personalize_learning_service/src/main/java/com/example/personalize_learning_service/ProgressService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../personalize_learning_service/src/main/java/com/example/personalize_learning_service/ServiceImpl/ProgressServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../user-service/src/main/java/com/educationPlatform/userservice/ServiceImpl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api_gateway/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../api_gateway/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../content-service/src/main/java/com/educationPlatform/contentservice/service/CourseContentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../content-service/src/main/java/com/educationPlatform/contentservice/service/CourseContentService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/educationPlatform/notificationService/notificationservice/controllers/EmailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/educationPlatform/notificationService/notificationservice/controllers/EmailController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/educationPlatform/notificationService/notificationservice/dtos/emailDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/educationPlatform/notificationService/notificationservice/dtos/emailDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/educationPlatform/notificationService/notificationservice/models/email.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/educationPlatform/notificationService/notificationservice/models/email.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/educationPlatform/notificationService/notificationservice/repository/emailRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/educationPlatform/notificationService/notificationservice/repository/emailRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../payment_service/src/main/java/com/example/payment_service/Services/PaymentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../payment_service/src/main/java/com/example/payment_service/Services/PaymentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../personalize_learning_service/src/main/java/com/example/personalize_learning_service/Services/ProgressService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../personalize_learning_service/src/main/java/com/example/personalize_learning_service/Services/ProgressService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../user-service/src/main/java/com/educationPlatform/userservice/UserServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../user-service/src/main/java/com/educationPlatform/userservice/UserServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../user-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../user-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-service/src/main/java/com/educationPlatform/userservice/controller/AuthenticationController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-service/src/main/java/com/educationPlatform/userservice/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../user-service/src/main/java/com/educationPlatform/userservice/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-service/src/main/java/com/educationPlatform/userservice/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../user-service/src/main/java/com/educationPlatform/userservice/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-service/src/main/java/com/educationPlatform/userservice/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../user-service/src/main/java/com/educationPlatform/userservice/service/UserService.java" afterDir="false" />
     </list>
-
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -24,20 +40,23 @@
       <ProjectState />
     </projectState>
   </component>
-
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
         <projects_view>
           <tree_state>
-            <expand />
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="notification-service" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
             <select />
           </tree_state>
         </projects_view>
       </state>
     </system>
   </component>
-
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
@@ -53,13 +72,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "D:/OSGI/-Educational-Platform-for-Online-Learning/microservices/notification-service"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/OSGI/-Educational-Platform-for-Online-Learning/microservices/notification-service&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

@@ -1,0 +1,7 @@
+version: '3.8'
+
+services:
+  web:
+    image: api_gateway_service
+    ports:
+      - "8082:8082"
