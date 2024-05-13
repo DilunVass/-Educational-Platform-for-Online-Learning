@@ -23,3 +23,52 @@ Architectural Diagram
 
 
 ![image](https://github.com/DilunVass/-Educational-Platform-for-Online-Learning/assets/100837990/3b085956-98c2-47cd-9eb4-456cde02c197)
+
+Prerequisites
+
+Docker and Docker Compose installed on your system.
+Node.js and npm installed for React development.
+
+Spring Boot Application: A RESTful API connecting to a MongoDB database.
+React Application: A frontend application built with React, serving as the client for the Spring Boot API.
+
+Setup and Deployment
+
+Step 1: Clone the Repository
+Clone the repository to your local machine.
+
+git clone <"GitHub repository url">
+cd repository-name
+
+Step 2: Build and Run the Spring Boot Application
+Navigate to the Spring Boot application directory and build the Docker image.
+
+cd microservices
+
+docker build -t service .
+
+Run the Spring Boot application using Docker Compose.
+
+cd..
+docker-compose up -d
+
+Step 3: Build and Serve the React Application
+
+Navigate to the React application directory and build the production version.
+
+cd client
+npm start
+
+Step 4: Access the Applications
+
+Spring Boot Application: Access the Spring Boot application at http://localhost:8080.
+React Application: Access the React application at http://localhost:3000.
+
+Step 5: Stop the Applications
+To stop the applications, navigate to the root directory of your project and run:
+
+docker-compose down
+
+Configuration
+The Spring Boot application is configured to connect to MongoDB using the service name api-database defined in the docker-compose.yml file.
+Adjust the port mappings in the docker-compose.yml file according to your application's requirements.
