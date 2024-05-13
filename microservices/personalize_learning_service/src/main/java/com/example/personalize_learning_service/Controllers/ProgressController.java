@@ -1,5 +1,6 @@
 package com.example.personalize_learning_service.Controllers;
 
+import com.example.personalize_learning_service.Dtos.ProgressDto;
 import com.example.personalize_learning_service.Models.Progress;
 import com.example.personalize_learning_service.Services.ProgressService;
 import com.example.personalize_learning_service.Utils.ApiResponse;
@@ -14,23 +15,21 @@ public class ProgressController {
     private ProgressService progressService;
 
     @PostMapping
-    public ApiResponse<Progress> setProgress(String studentId, String courseId){
-        Progress progress = progressService.setProgress(studentId,courseId);
+    public ApiResponse<Progress> setProgress(@RequestBody ProgressDto progressDto){
+        Progress progress = progressService.setProgress(progressDto);
         return new ApiResponse<>(progress, 201, "Progress set successfully");
     }
 
     @GetMapping
-    public ApiResponse<Double> getProgressByStudentAndCourse(String studentId, String courseId){
-        double response = progressService.getProgressByStudentAndCourse(studentId, courseId);
+    public ApiResponse<Double> getProgressByStudentAndCourse(@RequestBody ProgressDto progressDto){
+        double response = progressService.getProgressByStudentAndCourse(progressDto);
         return new ApiResponse<>(response, 200, "Progress retrieved successfully");
     }
 
     @PutMapping
-    public ApiResponse<Progress> updateProgress(String studentId, String courseId){
-        Progress progress = progressService.updateProgress(studentId,courseId);
+    public ApiResponse<Progress> updateProgress(@RequestBody ProgressDto progressDto){
+        Progress progress = progressService.updateProgress(progressDto);
         return new ApiResponse<>(progress, 201, "Progress updated successfully");
     }
-
-
 
 }
