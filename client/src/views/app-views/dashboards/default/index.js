@@ -33,9 +33,11 @@ import Chart from "react-apexcharts";
 import ApexCharts from "apexcharts";
 import { VictoryPie } from "victory-pie";
 import { current } from "@reduxjs/toolkit";
+import { APP_PREFIX_PATH } from "configs/AppConfig";
 
 const DefaultDashboard = () => {
 
+    const navigate = useNavigate();
     const {currentTheme} = useSelector(state => state.theme);
     const data = [
         {},
@@ -95,7 +97,7 @@ const DefaultDashboard = () => {
 
             {data.map((item, index) => {
                 return (
-                    <Row gutter={16} style={{ width: "100%" }}>
+                    <Row gutter={16} style={{ width: "100%" }} onClick={() => {navigate(`${APP_PREFIX_PATH}/dashboards/course/enrolledCourse`)}}>
                         <Row style={{ width: "100%" }}>
                             <Col span={24}>
                                 <Card

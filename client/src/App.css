@@ -304,6 +304,46 @@ p{
     margin-left: 25%;
 }
 
+.MuiDrawer-root{
+    width: 0px !important;
+}
+
+.MuiBox-root{
+    display: flex;
+    justify-content: center;
+}
+
+.MuiPaper-root{
+    width: 100%;
+}
+
+.enrolled-course-sidebar-dark > .MuiPaper-root{
+    background-color: #283142;
+    color: #72849a;
+}
+
+.enrolled-course-sidebar-dark > .MuiPaper-root > ul > div > .MuiListItemIcon-root > svg {
+    color: #72849a;
+}
+
+.mui-btn-dark{
+    background-color: #9311d4 !important;
+}
+
+.mui-btn-light{
+    background-color: #3e79f7 !important;
+}
+
+.mui-card-content-dark{
+    background-color: #001529 !important;
+    color: #d1d1d1 !important;
+}
+
+.mui-card-content-light{
+    background-color: white !important;
+    color: black !important;
+}
+
 @media only screen and (min-width: 220px) and (max-width: 576px){
     .login-form-banner{
         margin-bottom: 20px;

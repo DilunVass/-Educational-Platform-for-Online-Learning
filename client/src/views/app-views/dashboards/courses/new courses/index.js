@@ -89,6 +89,37 @@ const NewCourse = () => {
         });
     };
 
+    const readFileAsync = (file) => {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                //setImgFilePreview(reader.result);
+                //console.log(content);
+                // newState = content.map((itemInner, indexInner) => {
+                //     if(indexInner === index){
+                //         //console.log(index);
+                //         //console.log(indexInner);
+                //         itemInner["imgFilePreview"] = reader.result
+                //         return itemInner
+                //     }else{
+                //         return itemInner
+                //     }
+                // })
+                resolve(reader.result)
+                // console.log("new state inside block");
+                // console.log(newState);
+                // console.log("new state +++++++++++++++++++++++++++");
+                // console.log(newState);
+            };
+
+            reader.onerror = () => {
+                reject(null);
+            };
+
+            reader.readAsDataURL(file)
+        });
+    }
+
     const handleAddCourse = () => {
         try {
             console.log(courseInfo);
@@ -311,34 +342,49 @@ const NewCourse = () => {
                                                     }}
                                                 >
                                                     {/* <Input value={courseInfo.courseName} onChange={(e) => {setCourseInfo({...courseInfo, courseName: e.target.value})}}/> */}
-                                                    <label htmlFor="img-upload" key={index}>
+                                                    <label htmlFor={`img-upload${index}`} key={index}>
                                                         <p style={{backgroundColor: currentTheme === "dark" ? GOLD_BASE_OUR_GYM : BLUE_BASE, color: "white", cursor: "pointer", padding: "8px 16px", borderRadius: "10px"}}>Upload Image</p>
                                                         <Input
-                                                            id="img-upload"
+                                                            id={`img-upload${index}`}
                                                             type="file"
                                                             accept="image/png, image/jpg, image/jpeg"
-                                                            onChange={(e) => {
+                                                            onChange={async (e) => {
                                                                 const img = e.target.files[0];
+                                                                //let newState = null;
                                                                 if (img) {
-                                                                    const reader = new FileReader();
-                                                                    reader.onloadend = () => {
-                                                                        //setImgFilePreview(reader.result);
-                                                                        console.log(content);
-                                                                        const newState = content.map((itemInner, indexInner) => {
-                                                                            if(indexInner === index){
-                                                                                console.log(index);
-                                                                                console.log(indexInner);
-                                                                                itemInner["imgFilePreview"] = reader.result
-                                                                                return itemInner
-                                                                            }else{
-                                                                                return itemInner
-                                                                            }
-                                                                        })
-                                                                        // console.log("new state +++++++++++++++++++++++++++");
-                                                                        // console.log(newState);
-                                                                        setContent(newState)
-                                                                    };
-                                                                    reader.readAsDataURL(img);
+                                                                    // const reader = new FileReader();
+                                                                    // reader.onloadend = () => {
+                                                                    //     //setImgFilePreview(reader.result);
+                                                                    //     //console.log(content);
+                                                                    //     newState = content.map((itemInner, indexInner) => {
+                                                                    //         if(indexInner === index){
+                                                                    //             //console.log(index);
+                                                                    //             //console.log(indexInner);
+                                                                    //             itemInner["imgFilePreview"] = reader.result
+                                                                    //             return itemInner
+                                                                    //         }else{
+                                                                    //             return itemInner
+                                                                    //         }
+                                                                    //     })
+                                                                    //     console.log("new state inside block");
+                                                                    //     console.log(newState);
+                                                                    //     // console.log("new state +++++++++++++++++++++++++++");
+                                                                    //     // console.log(newState);
+                                                                    // };
+                                                                    //reader.readAsDataURL(img);
+                                                                    //console.log("new state.......");
+                                                                    //console.log(newState);
+                                                                    const newState = await Promise.all(content.map(async (itemInner, indexInner) => {
+                                                                        if(indexInner === index){
+                                                                            //console.log(index);
+                                                                            //console.log(indexInner);
+                                                                            itemInner["imgFilePreview"] = await readFileAsync(img)
+                                                                            return itemInner
+                                                                        }else{
+                                                                            return itemInner
+                                                                        }
+                                                                    }))
+                                                                    setContent(newState);
                                                                 }
                                                                 //setImgFile(img);
                                                                 // setWebCamImage(null);
