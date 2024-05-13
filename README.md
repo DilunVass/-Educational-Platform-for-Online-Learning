@@ -1,7 +1,6 @@
 # NexTutor - Educational-Platform-for-Online-Learning
 
 
-Registration Number	Name
 IT21288012	De Vass Gunawardane A.P.D.N
 IT21355028	Marasinghe M.M.C
 IT21268076	Karunathilaka H.M.C.H
