@@ -90,4 +90,13 @@ public class EnrollmentServiceImpl implements EnrollmentService {
 
         return "Unenrollement successful";
     }
+
+    public List<Course> getCoursesByStudentId(String studentId){
+        Enrollment enrollment = enrollmentRepository.getByStudentId(studentId);
+        if (enrollment != null) {
+            return enrollment.getCourseList();
+        } else {
+            return List.of();
+        }
+    }
 }

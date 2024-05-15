@@ -18,5 +18,6 @@ public interface CourseService {
     Course getCourseById(String courseId);
 
     List<Course> getCoursesByCategory(Category category);
+
 }
 

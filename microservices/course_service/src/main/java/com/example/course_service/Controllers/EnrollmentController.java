@@ -7,6 +7,8 @@ import com.example.course_service.ServicesImpl.EnrollmentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/enrollments")
 public class EnrollmentController {
@@ -24,5 +26,10 @@ public class EnrollmentController {
     public String unEnrollStudent(@PathVariable String studentId,
                                 @PathVariable String courseId) {
         return enrollmentService.unEnrollStudent(studentId, courseId);
+    }
+
+    @GetMapping("/{studentId}")
+    public List<Course> getCoursesByStudentId(String studentId){
+        return enrollmentService.getCoursesByStudentId(studentId);
     }
 }
