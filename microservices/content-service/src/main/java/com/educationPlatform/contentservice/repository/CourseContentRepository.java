@@ -1,6 +1,6 @@
 package com.educationPlatform.contentservice.repository;
 
-import com.educationPlatform.contentservice.models.CourseContent;
+import com.educationPlatform.contentservice.dto.models.CourseContent;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;

@@ -49,10 +49,10 @@ public class CourseController {
 
     // Endpoint to create a new course
     @PostMapping
-    public ApiResponse<Course> createCourse(@RequestBody CourseDto courseDto) {
-        Course course = courseService.createCourse(courseDto);
+    public ApiResponse<Course> createCourse(@RequestBody Course course) {
+        Course courseRes = courseService.createCourse(course);
         if(course != null){
-            return new ApiResponse<>(course, "success", "Course Added successfully");
+            return new ApiResponse<>(courseRes, "success", "Course Added successfully");
         }else{
             return new ApiResponse<>(null, "error", "Invalid course data");
         }

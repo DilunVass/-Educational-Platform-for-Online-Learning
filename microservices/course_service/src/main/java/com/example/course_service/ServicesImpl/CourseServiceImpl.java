@@ -31,16 +31,16 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public Course createCourse(CourseDto courseDto) {
+    public Course createCourse(Course course) {
 
-        Optional<Course> existingCourse = courseRepository.findByCourseName(courseDto.getCourseName());
+        Optional<Course> existingCourse = courseRepository.findByCourseName(course.getCourseName());
 
         if (existingCourse.isPresent()) {
-            throw new IllegalArgumentException("Course with ID " + courseDto.getCourseName() + " already exists.");
+            throw new IllegalArgumentException("Course with ID " + course.getCourseName() + " already exists.");
         }
 
         // Convert CourseDto to Course
-        Course course = getCourse(courseDto);
+//        Course course = getCourse(course);
 
         // Save the course to the database
         return courseRepository.save(course);
@@ -48,6 +48,7 @@ public class CourseServiceImpl implements CourseService {
 
     private static Course getCourse(CourseDto courseDto) {
         Course course = new Course();
+        course.setCourseId(course.getCourseId());
         course.setCourseName(courseDto.getCourseName());
         course.setCategory(courseDto.getCategory());
         course.setCourseDuration(courseDto.getCourseDuration());

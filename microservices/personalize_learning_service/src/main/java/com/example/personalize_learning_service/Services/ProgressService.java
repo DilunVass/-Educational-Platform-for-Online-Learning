@@ -89,7 +89,8 @@ public class ProgressService {
         if(progressPresent.isPresent()){
             Progress progress = progressRepository.getProgressByStudentIdAndCourseId(progressDto.getStudentId(), progressDto.getCourseId());
             return progress.getProgressPercentage();
-        }else{
+        }
+        else{
             return 0.0;
         }
     }

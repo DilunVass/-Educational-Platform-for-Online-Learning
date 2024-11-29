@@ -17,8 +17,8 @@ public class Payment {
     @Id
     private ObjectId paymentId;
     private String cardNo;
-    private String expiryDate;
+    private String expireDate;
     private int cvc;
-    private String name;
+    private String holder;
     private double amount;
 }

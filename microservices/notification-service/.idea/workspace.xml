@@ -4,13 +4,41 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-
     <list default="true" id="b5c34c09-b1df-485e-96c9-f1e40b58e0fc" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../api_gateway/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eureka_service/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../payment_service/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../personalize_learning_service/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../client/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../client/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../client/src/components/layout-components/MenuContent.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../client/src/components/layout-components/MenuContent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../client/src/configs/NavigationConfig.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../client/src/configs/NavigationConfig.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../client/src/configs/RoutesConfig.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../client/src/configs/RoutesConfig.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../client/src/views/app-views/dashboards/courses/new courses/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../client/src/views/app-views/dashboards/courses/new courses/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../client/src/views/app-views/dashboards/default/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../client/src/views/app-views/dashboards/default/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../client/src/views/app-views/dashboards/enrolledCourse/course.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../client/src/views/app-views/dashboards/enrolledCourse/course.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../client/src/views/app-views/landingPage/ImageTile.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../client/src/views/app-views/landingPage/ImageTile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../client/src/views/app-views/landingPage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../client/src/views/app-views/landingPage/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api_gateway/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../api_gateway/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../content-service/src/main/java/com/educationPlatform/contentservice/controllers/CourseContentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../content-service/src/main/java/com/educationPlatform/contentservice/controllers/CourseContentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../content-service/src/main/java/com/educationPlatform/contentservice/models/CourseContent.java" beforeDir="false" afterPath="$PROJECT_DIR$/../content-service/src/main/java/com/educationPlatform/contentservice/dto/models/CourseContent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../content-service/src/main/java/com/educationPlatform/contentservice/repository/CourseContentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../content-service/src/main/java/com/educationPlatform/contentservice/repository/CourseContentRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../content-service/src/main/java/com/educationPlatform/contentservice/service/CourseContentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../content-service/src/main/java/com/educationPlatform/contentservice/service/CourseContentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../course_service/src/main/java/com/example/course_service/Controllers/CourseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../course_service/src/main/java/com/example/course_service/Controllers/CourseController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../course_service/src/main/java/com/example/course_service/Controllers/EnrollmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../course_service/src/main/java/com/example/course_service/Controllers/EnrollmentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../course_service/src/main/java/com/example/course_service/Repositories/EnrollmentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../course_service/src/main/java/com/example/course_service/Repositories/EnrollmentRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../course_service/src/main/java/com/example/course_service/Services/CourseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../course_service/src/main/java/com/example/course_service/Services/CourseService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../course_service/src/main/java/com/example/course_service/Services/EnrollmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../course_service/src/main/java/com/example/course_service/Services/EnrollmentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../course_service/src/main/java/com/example/course_service/ServicesImpl/CourseServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../course_service/src/main/java/com/example/course_service/ServicesImpl/CourseServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../course_service/src/main/java/com/example/course_service/ServicesImpl/EnrollmentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../course_service/src/main/java/com/example/course_service/ServicesImpl/EnrollmentServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../user-service/src/main/java/com/educationPlatform/userservice/UserServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../user-service/src/main/java/com/educationPlatform/userservice/UserServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../user-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../user-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../payment_service/src/main/java/com/example/payment_service/Dtos/PaymentDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../payment_service/src/main/java/com/example/payment_service/Dtos/PaymentDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../payment_service/src/main/java/com/example/payment_service/Models/Payment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../payment_service/src/main/java/com/example/payment_service/Models/Payment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../payment_service/src/main/java/com/example/payment_service/Services/PaymentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../payment_service/src/main/java/com/example/payment_service/Services/PaymentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../personalize_learning_service/src/main/java/com/example/personalize_learning_service/Controllers/ProgressController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../personalize_learning_service/src/main/java/com/example/personalize_learning_service/Controllers/ProgressController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../personalize_learning_service/src/main/java/com/example/personalize_learning_service/Services/ProgressService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../personalize_learning_service/src/main/java/com/example/personalize_learning_service/Services/ProgressService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../personalize_learning_service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../personalize_learning_service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-service/src/main/java/com/educationPlatform/userservice/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../user-service/src/main/java/com/educationPlatform/userservice/service/AuthService.java" afterDir="false" />
     </list>
-
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -24,7 +52,6 @@
       <ProjectState />
     </projectState>
   </component>
-
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
@@ -37,7 +64,6 @@
       </state>
     </system>
   </component>
-
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
@@ -57,7 +83,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "D:/OSGI/-Educational-Platform-for-Online-Learning/microservices/notification-service"
+    "last_opened_file_path": "D:/OSGI/-Educational-Platform-for-Online-Learning/microservices/course_service"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />

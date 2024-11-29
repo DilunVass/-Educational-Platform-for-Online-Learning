@@ -13,23 +13,23 @@ const ImageTile = ({ item }) => {
         `${item?.first_name} ${item?.last_name}`
     );
 
-    useEffect(() => {
-        axios
-            .head(`${GOOGLE_BUCKET_URL}/${item?.image}`)
-            .then((res) => {
-                if (
-                    res.status === 200 &&
-                    `${GOOGLE_BUCKET_URL}/${item?.image}`.length >
-                        GOOGLE_BUCKET_URL.length + 2
-                ) {
-                    //console.log(`img existenet for: ${props.name}`);
-                    setIsImageAvailable(true);
-                }
-            })
-            .catch((err) => {
-                setIsImageAvailable(false);
-            });
-    }, [item]);
+    // useEffect(() => {
+    //     axios
+    //         .head(`${GOOGLE_BUCKET_URL}/${item?.image}`)
+    //         .then((res) => {
+    //             if (
+    //                 res.status === 200 &&
+    //                 `${GOOGLE_BUCKET_URL}/${item?.image}`.length >
+    //                     GOOGLE_BUCKET_URL.length + 2
+    //             ) {
+    //                 //console.log(`img existenet for: ${props.name}`);
+    //                 setIsImageAvailable(true);
+    //             }
+    //         })
+    //         .catch((err) => {
+    //             setIsImageAvailable(false);
+    //         });
+    // }, [item]);
 
     return (
         <>
@@ -71,21 +71,35 @@ const ImageTile = ({ item }) => {
                             currentTheme === "dark" && "img-text-name-dark"
                         }`}
                     >
-                        JAvaScript Advanced Topics and Tutorial
+                        {item?.courseName}
+                    </p>
+                    <p
+                        className={`img-text-name ${
+                            currentTheme === "dark" && "img-text-name-dark"
+                        }`} style={{fontSize: "12px", marginTop: "8px", fontWeight: 300}}
+                    >
+                        {item?.description?.substring(0, 50) + "..."}
                     </p>
                     <p
                         className={`img-text-name2 ${
                             currentTheme === "dark" && "img-text-name-dark2"
                         }`}
                     >
-                        Marsh Rooney 
+                        {item?.instructor? item.instructor : ""}
+                    </p>
+                    <p
+                        className={`img-text-name2 ${
+                            currentTheme === "dark" && "img-text-name-dark2"
+                        }`}
+                    >
+                        {item?.courseDuration? item.courseDuration : ""}
                     </p>
                     <p
                         className={`img-text-name3 ${
                             currentTheme === "dark" && "img-text-name-dark3"
                         }`}
                     >
-                        $13.68
+                        ${item?.price}
                     </p>
                     {/* <p className="img-text-date">
                         Expired at: 2024-9-10

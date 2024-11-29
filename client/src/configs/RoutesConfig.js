@@ -32,7 +32,7 @@ export const protectedRoutes = [
     },
     {
         key: 'dashboard-course-enrolledCourse',
-        path: `${APP_PREFIX_PATH}/dashboards/course/enrolledCourse`,
+        path: `${APP_PREFIX_PATH}/dashboards/course/enrolledCourse/:id`,
         component: React.lazy(() => import('views/app-views/dashboards/enrolledCourse/courseView')),
     },
 ]

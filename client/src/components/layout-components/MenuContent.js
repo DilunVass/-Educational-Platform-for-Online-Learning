@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { SIDE_NAV_LIGHT, NAV_TYPE_SIDE } from "constants/ThemeConstant";
 import utils from 'utils'
 import { onMobileNavToggle } from 'store/slices/themeSlice';
+import { useState } from 'react';
 
 const { useBreakpoint } = Grid;
 
@@ -70,15 +71,46 @@ const SideNavContent = (props) => {
 
 	const { routeInfo, hideGroupTitle, sideNavTheme = SIDE_NAV_LIGHT } = props;
 
+	const {userRole} = useSelector(state => state.auth);
+	const dispatch = useDispatch();
+	const [openKeys, setOpenKeys] = useState([]);
+	const handleOpenChange = keys => {
+		setOpenKeys([keys[keys.length - 1]])
+	}
+
 	const menuItems = useMemo(() => getSideNavMenuItem(navigationConfig), []);
+
+	const hideNewUserTab = (menu_items) => {
+		menu_items = menu_items.map((section) => {
+			return(
+				section?.children?.map((submenu) => {
+					return(
+						submenu.children = submenu?.children?.filter((item) => {
+							if(item?.key === "dashboards/course/newcourse" && userRole === "STUDENT"){
+								
+							}else if(item?.key === "dashboards-packages-new" && userRole === "STUDENT"){
+
+							}
+							else{
+								return item;
+							}
+						})
+					)
+				})
+			)
+	})}
+
+	hideNewUserTab(menuItems)
 
 	return (
 		<Menu
 			mode="inline"
 			theme={sideNavTheme === SIDE_NAV_LIGHT ? "light" : "dark"}
 			style={{ height: "100%", borderInlineEnd: 0}}
-			defaultSelectedKeys={[routeInfo?.key]}
-			defaultOpenKeys={setDefaultOpen(routeInfo?.key)}
+			openKeys={openKeys}
+			onOpenChange={handleOpenChange}
+			// defaultSelectedKeys={[routeInfo?.key]}
+			// defaultOpenKeys={setDefaultOpen(routeInfo?.key)}
 			className={hideGroupTitle ? "hide-group-title" : ""}
 			items={menuItems}
 		/>

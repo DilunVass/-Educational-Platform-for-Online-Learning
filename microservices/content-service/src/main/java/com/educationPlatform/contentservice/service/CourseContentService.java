@@ -1,7 +1,7 @@
 package com.educationPlatform.contentservice.service;
 
 
-import com.educationPlatform.contentservice.models.CourseContent;
+import com.educationPlatform.contentservice.dto.models.CourseContent;
 import com.educationPlatform.contentservice.repository.CourseContentRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +19,10 @@ public class CourseContentService {
 
     public List<CourseContent> createCourseContent(List<CourseContent> contents){
         List<CourseContent> contentList = new ArrayList<>(contents);
+        for(CourseContent content: contentList){
+            content.setNoOfSections(contents.size());
+        }
+        System.out.println(contentList);
         courseContentRepository.saveAll(contentList);
         return contentList;
     }

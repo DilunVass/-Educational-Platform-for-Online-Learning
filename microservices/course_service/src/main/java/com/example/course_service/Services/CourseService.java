@@ -9,7 +9,7 @@ public interface CourseService {
 
     List<Course> getAllCourses();
 
-    Course createCourse(CourseDto courseDto);
+    Course createCourse(Course course);
 
     Course updateCourse(String courseId, Course courseDetails);
 

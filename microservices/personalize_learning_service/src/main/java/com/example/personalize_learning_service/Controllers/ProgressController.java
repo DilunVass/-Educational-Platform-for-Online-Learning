@@ -21,7 +21,12 @@ public class ProgressController {
     }
 
     @GetMapping
-    public ApiResponse<Double> getProgressByStudentAndCourse(@RequestBody ProgressDto progressDto){
+    public ApiResponse<Double> getProgressByStudentAndCourse(@RequestParam String studentId,
+                                                             @RequestParam String courseId) {
+        ProgressDto progressDto = new ProgressDto();
+        progressDto.setStudentId(studentId);
+        progressDto.setCourseId(courseId);
+
         double response = progressService.getProgressByStudentAndCourse(progressDto);
         return new ApiResponse<>(response, 200, "Progress retrieved successfully");
     }

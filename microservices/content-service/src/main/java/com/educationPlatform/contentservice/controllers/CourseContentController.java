@@ -1,7 +1,7 @@
 package com.educationPlatform.contentservice.controllers;
 
 
-import com.educationPlatform.contentservice.models.CourseContent;
+import com.educationPlatform.contentservice.dto.models.CourseContent;
 import com.educationPlatform.contentservice.service.CourseContentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/contents")
+@RequestMapping("/api/contents")
 public class CourseContentController {
 
     @Autowired
@@ -22,7 +22,7 @@ public class CourseContentController {
     }
 
     @GetMapping("/{courseId}")
-    public List<CourseContent> getContentByCourseId(@PathVariable String courseId){
+    public List<CourseContent> getContentByCourseId(@PathVariable("courseId") String courseId){
         List<CourseContent> contents = service.getContentByCourseId(courseId);
         return contents;
     }

@@ -8,4 +8,6 @@ import java.util.Optional;
 
 public interface EnrollmentRepository extends MongoRepository<Enrollment, String> {
     Optional<Enrollment> findByStudentId(String studentId);
+
+    Enrollment getByStudentId(String studentId);
 }

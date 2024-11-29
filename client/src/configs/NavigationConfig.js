@@ -42,24 +42,6 @@ const sectionNav = [{
           submenu: []
         },
       ]
-    },
-    {
-      key: 'dashboards/BB',
-      path: `${APP_PREFIX_PATH}/dashboards/home`,
-      title: 'C',
-      icon: UsergroupDeleteOutlined,
-      breadcrumb: false,
-      isGroupTitle: false,
-      submenu: [
-        {
-          key: 'vieww',
-          path: `${APP_PREFIX_PATH}/dashboards/home`,
-          title: 'D',
-          icon: UsergroupAddOutlined,
-          breadcrumb: false,
-          submenu: []
-        },
-      ]
     }
   ]
 }]

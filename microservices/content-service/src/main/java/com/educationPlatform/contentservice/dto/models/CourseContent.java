@@ -1,4 +1,4 @@
-package com.educationPlatform.contentservice.models;
+package com.educationPlatform.contentservice.dto.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,6 +23,6 @@ public class CourseContent {
     private double noOfSections;
     private String title;
     private String textContent;
-    private List<String> images;
-    private List<String> videoUrls;
+    private String images;
+    private String videoUrls;
 }

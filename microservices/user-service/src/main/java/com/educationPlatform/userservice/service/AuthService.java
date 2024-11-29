@@ -41,7 +41,7 @@ public class AuthService {
         user.setContact_no(request.getContact_no());
         user.setBase64ProfileImg(request.getBase64ProfileImg());
 //        user.setUserRole(request.getUserRole());
-        user.setUserRole(UserRole.ADMIN);
+        user.setUserRole(UserRole.STUDENT);
 
         user = userRepository.save(user);
 

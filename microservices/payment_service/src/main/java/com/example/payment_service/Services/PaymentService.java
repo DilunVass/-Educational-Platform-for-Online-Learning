@@ -19,10 +19,10 @@ public class PaymentService {
         }else {
             Payment payment = new Payment();
             payment.setCardNo(paymentDto.getCardNo());
-            payment.setName(paymentDto.getName());
-            payment.setExpiryDate(paymentDto.getExpiryDate());
+            payment.setHolder(paymentDto.getHolder());
+            payment.setExpireDate(paymentDto.getExpireDate());
             payment.setCvc(paymentDto.getCvc());
-            payment.setAmount(payment.getAmount());
+            payment.setAmount(paymentDto.getAmount());
 
             paymentRepository.save(payment);
 

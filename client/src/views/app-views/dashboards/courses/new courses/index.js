@@ -40,6 +40,8 @@ const NewCourse = () => {
     const { token } = theme.useToken();
     const [current, setCurrent] = useState(0);
     const [optionsCustom, setOptionsCustom] = useState([]);
+    const [courseId, setCourseId] = useState("");
+    // let courseId;
 
     // const optionsCustom = [
     //     "IT", "Engineering", "Accounting", "Programming"
@@ -60,17 +62,14 @@ const NewCourse = () => {
     const [content, setContent] = useState(
         [
             {
+                courseId: "",
                 title: "",
-                imgFile: null,
-                imgFilePreview: null,
-                videoUrl: ""
-            },
-            // {
-            //     title: "",
-            //     imgFile: null,
-            //     imgFilePreview: null,
-            //     videoUrl: ""
-            // }
+                textContent: "",
+                // imgFile: null,
+                // imgFilePreview: null,
+                images: null, 
+                videoUrls: ""
+            }
         ]
     )
 
@@ -125,9 +124,9 @@ const NewCourse = () => {
             console.log(courseInfo);
             axios.post(`http://localhost:8085/api/courses`, courseInfo)
             .then(res => {
-                console.log(res.status);
+                console.log(res.data.data.courseId);
                 if(res.status === 200){
-                    
+                    setCourseId(res.data.data.courseId);
                     setCourseInfo({
                         courseName: "",
                         category: null,
@@ -142,6 +141,8 @@ const NewCourse = () => {
                         "Successfully Created",
                         "Successfully Creted the course."
                     );
+
+                    next();
                 }
                 else{
                     openNotificationWithIcon(
@@ -171,7 +172,59 @@ const NewCourse = () => {
     }
 
     const handleAddScetions = () => {
-        console.log(content);
+        try {
+            const arr = [...content]
+            for (const section of arr) {
+                section.courseId = courseId;
+            }
+            // console.log(arr);
+            // console.log(content);
+            axios.post(`http://localhost:8085/api/contents`, arr)
+            .then(res => {
+                console.log(res.status);
+                if(res.status === 200){
+                    // courseId = res.data.courseId;
+                    setContent({
+                        courseId: "",
+                        title: "",
+                        textContent: "",
+                        imgFile: null,
+                        imgFilePreview: null,
+                        images: null, 
+                        videoUrls: ""
+                    });
+
+                    openNotificationWithIcon(
+                        "success",
+                        "Successfully Created",
+                        "Successfully Created the content."
+                    );
+                }
+                else{
+                    openNotificationWithIcon(
+                        "success",
+                        "Error Occured",
+                        "Unable to created the content."
+                    );
+                }
+            })
+            .catch(err => {
+                console.log(err.message);
+                console.log(err);
+                openNotificationWithIcon(
+                    "success",
+                    "Error Occured",
+                    "Unable to created content."
+                );
+            })
+        } catch (error) {
+            console.log(error);
+            openNotificationWithIcon(
+                "success",
+                "Error Occured",
+                "Unable to created the content."
+            );
+        }
     }
 
     useEffect(() => {
@@ -332,6 +385,33 @@ const NewCourse = () => {
                                                 </Form.Item>
                                             </Form.Item>
 
+                                            <Form.Item
+                                                wrapperCol={{ xs: 24, sm: { span: 24 } }}
+                                                style={{ marginBottom: "-10px" }}
+                                            >
+                                                <Form.Item
+                                                    label="Text Content"
+                                                >
+                                                    <Input 
+                                                        placeholder="tesxt content" 
+                                                        value={item.textContent} 
+                                                        onChange={(e) => {
+                                                            const newState = content.map((itemInner, indexInner) => {
+                                                                if(indexInner === index){
+                                                                    itemInner["textContent"] = e.target.value
+                                                                    return itemInner
+                                                                }else{
+                                                                    return itemInner
+                                                                }
+                                                            })
+                                                            // console.log("new state +++++++++++++++++++++++++++");
+                                                            // console.log(newState);
+                                                            setContent(newState)
+                                                        }}
+                                                    />
+                                                </Form.Item>
+                                            </Form.Item>
+
                                             <Form.Item wrapperCol={{ xs: 24, sm: { span: 24 } }}  style={{ marginBottom: "-10px" }}>
                                                 <Form.Item
                                                     label=" "
@@ -378,7 +458,7 @@ const NewCourse = () => {
                                                                         if(indexInner === index){
                                                                             //console.log(index);
                                                                             //console.log(indexInner);
-                                                                            itemInner["imgFilePreview"] = await readFileAsync(img)
+                                                                            itemInner["images"] = await readFileAsync(img)
                                                                             return itemInner
                                                                         }else{
                                                                             return itemInner
@@ -403,11 +483,11 @@ const NewCourse = () => {
                                                 >
                                                     <Input 
                                                         placeholder="Video URL" 
-                                                        value={item.videoUrl} 
+                                                        value={item.videoUrls} 
                                                         onChange={(e) => {
                                                             const newState = content.map((itemInner, indexInner) => {
                                                                 if(indexInner === index){
-                                                                    itemInner["videoUrl"] = e.target.value
+                                                                    itemInner["videoUrls"] = e.target.value
                                                                     return itemInner
                                                                 }else{
                                                                     return itemInner
@@ -443,11 +523,14 @@ const NewCourse = () => {
                                     setContent([
                                         ...content,
                                         {
+                                            courseId: courseId,
                                             title: "",
+                                            textContent: "",
                                             imgFile: null,
                                             imgFilePreview: null,
-                                            videoUrl: ""
-                                        } 
+                                            images: null, 
+                                            videoUrls: ""
+                                        }
                                     ])
                                 }}
                             />

@@ -18,13 +18,42 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { Checkbox } from "antd";
 import { ChildCare } from "@mui/icons-material";
+import { Cookies } from "react-cookie";
+import { useCookies } from "react-cookie"
 
 const drawerWidth = 250;
 
 function Sidebar({ onContentChange }) {
     const { currentTheme } = useSelector((state) => state.theme);
     const [open, setOpen] = useState({}); // State to handle multiple collapses
-    // const [sections, setSections] = useState([]);
+    const [sections, setSections] = useState([]);
+    const [userId, setUserId] = useState(null);
+    const [courseId, setCourseId] = useState(null);
+
+    const [cookies, setCookie, removeCookie] = useCookies([
+      "isDefaultPassword",
+      "token",
+      "userId",
+      "userRole",
+      "userFirstName",
+      "userLastName",
+      "userImage",
+      "isDarkMode"
+    ]);
+    
+    useEffect(() => {
+      // Get the userId from cookies
+      const userIdFromCookies = cookies.userId;
+      setCourseId(window.location.pathname.split("/").pop());
+      
+      if (userIdFromCookies) {
+        setUserId(userIdFromCookies);
+      }
+
+      console.log(userIdFromCookies);
+    }, []);
+
+    console.log(userId);
 
     const handleToggle = (section) => {
         setOpen((prev) => ({ ...prev, [section]: !prev[section] })); // Toggle specific section
@@ -49,79 +78,135 @@ function Sidebar({ onContentChange }) {
     //     { id: "drafts", label: "Drafts", children: ["Saved", "Archived"] },
     // ];
 
-    const sections = [
-      {
-          label: "Introduction",
-          children: [
-            {
-              key: "Part 1",
-              content: "This is the introduction of javascript scripting language."
-            },
-            {
-              key: "Part 2",
-              content: "https://source.unsplash.com/random"
-            },
-            {
-              key: "Part 3",
-              content: "https://www.youtube.com/embed/0u0UFWrUDss"
-            },
-          ]
-      },
-      {
-        label: "Strings and Arrays",
-        children: [
-          {
-            key: "Part 1",
-            content: "How to use arrys and strings efficiently to build algorithms."
-          },
-          {
-            key: "Part 2",
-            content: "https://source.unsplash.com/random"
-          },
-          {
-            key: "Part 3",
-            content: "https://www.youtube.com/embed/y9NuAuosGJ0"
-          },
-        ]
-    },
-    {
-      label: "Exception Handling",
-      children: [
-        {
-          key: "Part 1",
-          content: "Handle run time exceptions efficiently wthout breaking the flow."
-        },
-        {
-          key: "Part 2",
-          content: "https://source.unsplash.com/random"
-        },
-        {
-          key: "Part 3",
-          content: "https://www.youtube.com/embed/PGZlPzTWPKU"
-        },
-      ]
-  },
-      // {
-      //   label: "Introduction",
-      //   children: {
-      //     "Part 1" : "This is the introduction of javascript scripting language.",
-      //     "Part 2" : "https://source.unsplash.com/random", 
-      //     "Part 3" : "https://www.youtube.com/embed/0u0UFWrUDss",  
-      //   }
-      // },
-      // {
-      //   label: "Introduction",
-      //   children: {
-      //     "Part 1" : "This is the introduction of javascript scripting language.",
-      //     "Part 2" : "https://source.unsplash.com/random", 
-      //     "Part 3" : "https://www.youtube.com/embed/0u0UFWrUDss",  
-      //   }
-      // },
-  ];
+    useEffect(() => {
+      console.log(courseId);
+    axios.get(`http://localhost:8085/api/contents/${courseId}`)
+      .then(res => {
+        console.log(res);
+
+        const transformedSections = res.data.map((item, index) => {
+          const children = [];
+          let counter = 1;
+
+          if (item.textContent && item.textContent.length > 0) {
+            children.push({ key: `Part ${counter}`, content: item.textContent });
+            counter++;
+          }
+          if (item.images && item.images.length > 0) {
+            // item.images.forEach((url) => {
+              children.push({ key: `Part ${counter}`, content: item.images });
+              counter++;
+            // });
+          }
+          if (item.videoUrls && item.videoUrls.length > 0) {
+            // item.videoUrls.forEach((url) => {
+              children.push({ key: `Part ${counter}`, content: item.videoUrls });
+              counter++;
+            // });
+          }
+
+          console.log(children);
+
+          return {
+            id: item._id,
+            label: item.title,
+            children: children
+          };
+        });
+
+        setSections(transformedSections);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, [courseId]);
+
+  //   const sections = [
+  //     {
+  //         label: "Introduction",
+  //         children: [
+  //           {
+  //             key: "Part 1",
+  //             content: "This is the introduction of javascript scripting language."
+  //           },
+  //           {
+  //             key: "Part 2",
+  //             content: "https://source.unsplash.com/random"
+  //           },
+  //           {
+  //             key: "Part 3",
+  //             content: "https://www.youtube.com/embed/0u0UFWrUDss"
+  //           },
+  //         ]
+  //     },
+  //     {
+  //       label: "Strings and Arrays",
+  //       children: [
+  //         {
+  //           key: "Part 1",
+  //           content: "How to use arrys and strings efficiently to build algorithms."
+  //         },
+  //         {
+  //           key: "Part 2",
+  //           content: "https://source.unsplash.com/random"
+  //         },
+  //         {
+  //           key: "Part 3",
+  //           content: "https://www.youtube.com/embed/y9NuAuosGJ0"
+  //         },
+  //       ]
+  //   },
+  //   {
+  //     label: "Exception Handling",
+  //     children: [
+  //       {
+  //         key: "Part 1",
+  //         content: "Handle run time exceptions efficiently wthout breaking the flow."
+  //       },
+  //       {
+  //         key: "Part 2",
+  //         content: "https://source.unsplash.com/random"
+  //       },
+  //       {
+  //         key: "Part 3",
+  //         content: "https://www.youtube.com/embed/PGZlPzTWPKU"
+  //       },
+  //     ]
+  // },
+  //     // {
+  //     //   label: "Introduction",
+  //     //   children: {
+  //     //     "Part 1" : "This is the introduction of javascript scripting language.",
+  //     //     "Part 2" : "https://source.unsplash.com/random", 
+  //     //     "Part 3" : "https://www.youtube.com/embed/0u0UFWrUDss",  
+  //     //   }
+  //     // },
+  //     // {
+  //     //   label: "Introduction",
+  //     //   children: {
+  //     //     "Part 1" : "This is the introduction of javascript scripting language.",
+  //     //     "Part 2" : "https://source.unsplash.com/random", 
+  //     //     "Part 3" : "https://www.youtube.com/embed/0u0UFWrUDss",  
+  //     //   }
+  //     // },
+  // ];
 
     const handleContentClick = (content) => {
         onContentChange(content);
     };
+
+    const handleCompletion = (userId, courseId) => {
+        axios.put(`http://localhost:8085/api/completions`, {
+            studentId: userId,
+            courseId: courseId
+        })
+        .then(res => {
+            console.log(res);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    }
 
     // useEffect(() => {
     //   axios.get(`http://localhost:8089/api/contents/course123`)
@@ -203,7 +288,11 @@ function Sidebar({ onContentChange }) {
                                         }
                                     >
                                         <ListItemText primary={child.key} />
-                                        <Checkbox />
+                                        <Checkbox 
+                                        onChange={() =>
+                                          handleCompletion(userId, courseId)
+                                        }
+                                        />
                                     </ListItemButton>
                                 ))}
                             </List>
